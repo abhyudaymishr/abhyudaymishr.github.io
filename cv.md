@@ -23,11 +23,11 @@ intro: "A compact academic profile covering current research directions, backgro
       </div>
       <div class="info-card">
         <strong>Focus</strong>
-        Quantum computing and scientific ML
+        Quantum computing, scientific ML, and topological learning
       </div>
       <div class="info-card">
         <strong>Methods</strong>
-        Neural operators, sparse attention, simulation systems
+        Neural operators, sparse attention, invariants, and simulation systems
       </div>
       <div class="info-card">
         <strong>GitHub</strong>
@@ -48,6 +48,7 @@ B.Tech-M.Tech in Computer Science and Engineering
 - Neural operators
 - Scientific machine learning
 - Geometric deep learning
+- Knot theory and topological invariants
 - Sparse attention mechanisms
 
 ## Selected Research Directions
@@ -68,11 +69,16 @@ B.Tech-M.Tech in Computer Science and Engineering
     <h3 class="publication-card__title">Operator Learning for Fluids</h3>
     <p class="publication-card__abstract">Structured pipelines for Navier-Stokes style systems with a focus on reproducibility, long-horizon evaluation, and architecture comparison.</p>
   </article>
+  <article class="publication-card">
+    <p class="eyebrow">Topological ML</p>
+    <h3 class="publication-card__title">Knot-Type Recognition</h3>
+    <p class="publication-card__abstract">Learning to classify knots from diagrams, braid representations, and embeddings using polynomial invariants and geometry-aware models.</p>
+  </article>
 </div>
 
 ## Current Direction
 
-An especially promising bridge between my interests is **qudit transformers for circuit optimization**: using modern sequence or graph models to search, simplify, or compile high-dimensional quantum circuits while respecting the algebraic structure of the underlying Hilbert space.
+An especially promising bridge between my interests is the use of structure-aware learning in mathematically rich domains: qudit circuit optimization on one side, and knot-type recognition through invariants and embeddings on the other. Both problems reward models that respect the underlying algebra or topology instead of treating the data as generic tokens.
 
 <div class="note-block">
   This page is the current canonical CV. A downloadable PDF can be added later at <code>/files/cv.pdf</code> once you place the file in the repository.

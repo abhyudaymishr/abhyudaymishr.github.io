@@ -7,9 +7,8 @@ topics:
   - Language Models
   - Systems Engineering
   - Efficient Training
-order: 4
+order: 5
 ---
 NanoTransformer is a small language modeling system with training, evaluation, baseline, and latency tooling. While it sits outside the core physics and quantum theme, it represents the same engineering principle: build minimal but rigorous systems that make experiments easy to run and extend.
 
 It also acts as a practical counterweight to purely conceptual work by keeping optimization, benchmarking, and software structure in scope.
-

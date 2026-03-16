@@ -3,6 +3,7 @@ title: "GOLA: Geometric Neural Operator with Sparse Local Attention"
 summary: "A neural operator architecture that uses geometry-constrained sparse attention instead of dense global mixing."
 status: "Active research"
 timeline: "2026"
+image_alt: "Abstract geometric field visualization for GOLA"
 topics:
   - Neural Operators
   - Sparse Attention
@@ -18,4 +19,3 @@ Current lines of work:
 - encode spatial locality directly into attention masks
 - compare sparse attention against Fourier and message-passing baselines
 - study stability on fluid and transport benchmarks
-

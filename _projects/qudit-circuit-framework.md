@@ -4,6 +4,8 @@ permalink: /projects/qudit-circuit-framework/
 summary: "A generalized quantum circuit simulation framework for arbitrary d-dimensional systems, beyond qubit-only models."
 status: "Prototype"
 timeline: "2026"
+image: "https://scx2.b-cdn.net/gfx/news/2023/two-qudits-fully-entan.jpg"
+image_alt: "High-dimensional entanglement image for a qudit circuit framework"
 topics:
   - Quantum Computing
   - Qudits

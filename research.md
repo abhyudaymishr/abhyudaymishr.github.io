@@ -2,7 +2,7 @@
 title: Research
 permalink: /research/
 kicker: Research
-intro: "Current directions across operator learning, sparse geometric modeling, and quantum system design."
+intro: "Current directions across operator learning, sparse geometric modeling, quantum systems, and topological learning."
 ---
 ## Research Areas
 
@@ -22,6 +22,10 @@ Qudit systems create different tradeoffs in expressivity, synthesis, and hardwar
 
 I am also interested in using neural architectures to optimize or compile quantum circuits, especially in the qudit setting where the search space is richer and the standard qubit-first abstractions become limiting.
 
+### Topological Learning
+
+I am investigating knot-type recognition as a learning problem over topological objects. The aim is to combine classical invariants, geometric representations, and neural models in order to classify knots in ways that remain mathematically interpretable.
+
 ### Scientific Machine Learning Systems
 
 The research goal is not only to propose ideas but to build robust experimental systems around them: reproducible pipelines, interpretable baselines, and clean interfaces for future work.
@@ -32,6 +36,7 @@ The research goal is not only to propose ideas but to build robust experimental 
 - How should geometry enter the attention mechanism instead of remaining a post-hoc feature?
 - What abstractions make general qudit circuit construction usable for experimentation?
 - How can transformer-style models help optimize high-dimensional quantum circuits?
+- Which combinations of knot invariants and learned representations best support knot-type classification?
 - Which operator-learning benchmarks reveal failure modes rather than hiding them?
 
 ## Mathematical Lens
@@ -43,3 +48,11 @@ $$
 $$
 
 where the key modeling decision is how architecture encodes the structure of the operator $\mathcal{G}$ rather than only fitting samples.
+
+For knot learning, a parallel question is how much of the topology should be given to the model explicitly through invariants such as
+
+$$
+\Delta_K(t), \qquad V_K(q)
+$$
+
+versus learned from diagrams, braid words, or geometric embeddings.

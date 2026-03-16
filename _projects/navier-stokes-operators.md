@@ -7,7 +7,7 @@ topics:
   - Scientific ML
   - Navier-Stokes
   - Reproducible Systems
-order: 3
+order: 4
 ---
 This project studies how operator-learning models behave on fluid dynamics tasks where conservation laws and geometry cannot be treated as incidental details.
 
@@ -18,4 +18,3 @@ Focus areas:
 - benchmark construction for operator-learning tasks
 - locality-aware architectures and ablations
 - practical evaluation pipelines for long-horizon rollout quality
-
