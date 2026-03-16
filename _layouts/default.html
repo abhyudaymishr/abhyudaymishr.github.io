@@ -1,13 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% assign meta_title = page.title | default: site.title %}
+    {% assign meta_description = page.description | default: page.intro | default: page.summary | default: page.abstract | default: page.excerpt | default: site.description | strip_html | normalize_whitespace %}
+    {% assign canonical_url = page.url | absolute_url %}
+    {% assign meta_keywords = page.keywords | default: page.topics | default: site.keywords %}
+    {% assign raw_image = page.image | default: site.default_image %}
+    {% if raw_image contains '://' %}
+      {% assign meta_image = raw_image %}
+    {% else %}
+      {% assign meta_image = raw_image | absolute_url %}
+    {% endif %}
+    {% assign page_type = "WebPage" %}
+    {% assign og_type = "website" %}
+    {% if page.layout == "post" %}
+      {% assign page_type = "BlogPosting" %}
+      {% assign og_type = "article" %}
+    {% elsif page.layout == "publication" %}
+      {% assign page_type = "ScholarlyArticle" %}
+      {% assign og_type = "article" %}
+    {% elsif page.layout == "project" %}
+      {% assign page_type = "ResearchProject" %}
+      {% assign og_type = "article" %}
+    {% elsif page.layout == "home" %}
+      {% assign page_type = "WebSite" %}
+      {% assign og_type = "website" %}
+    {% endif %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       {% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}
     </title>
-    <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace }}">
+    <meta name="description" content="{{ meta_description }}">
+    <meta name="keywords" content="{{ meta_keywords | join: ', ' }}">
+    <meta name="author" content="{{ site.author.name }}">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#0e7c66">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta property="og:locale" content="{{ site.locale }}">
+    <meta property="og:title" content="{{ meta_title }}">
+    <meta property="og:description" content="{{ meta_description }}">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:type" content="{{ og_type }}">
+    <meta property="og:image" content="{{ meta_image }}">
+    <meta property="og:image:alt" content="{{ page.image_alt | default: meta_title }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ meta_title }}">
+    <meta name="twitter:description" content="{{ meta_description }}">
+    <meta name="twitter:image" content="{{ meta_image }}">
+    {% if page.layout == "post" and page.date %}
+      <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+    {% endif %}
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": {{ page_type | jsonify }},
+        "headline": {{ meta_title | jsonify }},
+        "name": {{ meta_title | jsonify }},
+        "description": {{ meta_description | jsonify }},
+        "url": {{ canonical_url | jsonify }},
+        "image": {{ meta_image | jsonify }},
+        "author": {
+          "@type": "Person",
+          "name": {{ site.author.name | jsonify }},
+          "url": {{ site.url | jsonify }}
+        },
+        "publisher": {
+          "@type": "Person",
+          "name": {{ site.author.name | jsonify }}
+        }
+        {% if page.layout == "post" and page.date %},
+        "datePublished": {{ page.date | date_to_xmlschema | jsonify }}
+        {% endif %}
+      }
+    </script>
+    {% if page.layout == "home" %}
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": {{ site.author.name | jsonify }},
+          "url": {{ site.url | jsonify }},
+          "email": {{ site.email | jsonify }},
+          "affiliation": {{ site.author.affiliation | jsonify }},
+          "description": {{ site.author.summary | jsonify }},
+          "sameAs": [
+            {{ site.repo_url | jsonify }},
+            {{ site.author.linkedin | jsonify }}
+          ]
+        }
+      </script>
+    {% endif %}
     <script>
       window.MathJax = {
         tex: {

@@ -1,6 +1,7 @@
 ---
 layout: home
 title: Home
+description: "Research portfolio of Abhyuday Mishra covering quantum computing, neural operators, scientific machine learning, qudits, and knot-type recognition."
 ---
 I am a B.Tech-M.Tech CSE student at **NFSU Gandhinagar** working at the intersection of quantum computing, scientific machine learning, and topological learning.
 

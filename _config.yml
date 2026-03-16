@@ -1,11 +1,20 @@
 title: "Abhyuday Mishra"
 email: "abhymishrgkp@gmail.com"
-description: "Quantum Computing | Scientific Machine Learning"
+description: "Quantum Computing, Neural Operators, Scientific Machine Learning, Qudits, and Knot-Type Recognition."
 url: "https://abhyudaymishr.github.io"
 baseurl: ""
 timezone: "Asia/Kolkata"
 repo_url: "https://github.com/abhyudaymishr/abhyudaymishr.github.io"
 repo_branch: "main"
+locale: "en_US"
+default_image: "/assets/images/seo-card.svg"
+keywords:
+  - Quantum Computing
+  - Scientific Machine Learning
+  - Neural Operators
+  - Qudits
+  - Knot Theory
+  - Topological Learning
 markdown: kramdown
 kramdown:
   input: GFM
@@ -16,8 +25,9 @@ author:
   name: "Abhyuday Mishra"
   affiliation: "NFSU Gandhinagar"
   role: "Quantum Computing | Scientific Machine Learning"
-  summary: "Researching neural operators, sparse geometric learning, and higher-dimensional quantum circuit design."
+  summary: "Researching neural operators, sparse geometric learning, qudit circuit design, and knot-type recognition at the intersection of scientific machine learning and topology."
   github: "abhyudaymishr"
+  linkedin: "https://www.linkedin.com/in/abhyuday-mishr-97a9002a5/"
 
 collections:
   projects:

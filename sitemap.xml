@@ -1,0 +1,32 @@
+---
+layout: null
+permalink: /sitemap.xml
+sitemap: false
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {% for item in site.pages %}
+    {% unless item.name == 'README.md' or item.name == 'sitemap.xml' or item.name == 'robots.txt' %}
+      <url>
+        <loc>{{ item.url | absolute_url }}</loc>
+      </url>
+    {% endunless %}
+  {% endfor %}
+  {% for item in site.posts %}
+    <url>
+      <loc>{{ item.url | absolute_url }}</loc>
+      <lastmod>{{ item.date | date_to_xmlschema }}</lastmod>
+    </url>
+  {% endfor %}
+  {% for item in site.projects %}
+    <url>
+      <loc>{{ item.url | absolute_url }}</loc>
+    </url>
+  {% endfor %}
+  {% for item in site.publications %}
+    <url>
+      <loc>{{ item.url | absolute_url }}</loc>
+    </url>
+  {% endfor %}
+</urlset>
+
