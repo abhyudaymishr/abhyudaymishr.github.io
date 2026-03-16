@@ -72,7 +72,7 @@ B.Tech-M.Tech in Computer Science and Engineering
   <article class="publication-card">
     <p class="eyebrow">Topological ML</p>
     <h3 class="publication-card__title">Knot-Type Recognition</h3>
-    <p class="publication-card__abstract">Learning to classify knots from diagrams, braid representations, and embeddings using polynomial invariants and geometry-aware models.</p>
+    <p class="publication-card__abstract">A hybrid scientific pipeline for knot analysis from images, combining CNN classification, heuristic Gauss/PD extraction, and structural simplification tools.</p>
   </article>
 </div>
 

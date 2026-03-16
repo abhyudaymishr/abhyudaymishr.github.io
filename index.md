@@ -11,5 +11,5 @@ Currently building:
 
 - **GOLA**: a geometric neural operator with sparse local attention
 - **Qudit Quantum Circuit Framework**: tools for simulating and studying higher-dimensional quantum gates
-- **Knot-Type Recognition**: topological machine learning using knot invariants and geometric representations
+- **Knot-Type Recognition**: a hybrid image-classification and Gauss/PD extraction pipeline for knot analysis
 - **Neural Operators for Fluid Systems**: operator-learning pipelines for Navier-Stokes style problems
