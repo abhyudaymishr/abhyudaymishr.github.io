@@ -1,0 +1,14 @@
+<nav class="site-nav" aria-label="Primary">
+  {% for item in site.data.navigation %}
+    {% assign active = false %}
+    {% if page.url == item.url %}
+      {% assign active = true %}
+    {% elsif item.url != "/" and page.url contains item.url %}
+      {% assign active = true %}
+    {% endif %}
+    <a href="{{ item.url | relative_url }}" class="site-nav__link{% if active %} is-active{% endif %}">
+      {{ item.title }}
+    </a>
+  {% endfor %}
+</nav>
+

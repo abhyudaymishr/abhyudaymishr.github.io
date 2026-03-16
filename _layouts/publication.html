@@ -1,0 +1,27 @@
+---
+layout: default
+---
+<article class="page-block">
+  <header class="page-header">
+    <p class="eyebrow">Publication</p>
+    <h1>{{ page.title }}</h1>
+    <p class="meta-line">
+      {% if page.authors %}{{ page.authors }}{% endif %}
+      {% if page.venue %}<span class="meta-separator">/</span>{{ page.venue }}{% endif %}
+      {% if page.year %}<span class="meta-separator">/</span>{{ page.year }}{% endif %}
+    </p>
+  </header>
+  {% if page.abstract %}
+    <p class="page-header__intro">{{ page.abstract }}</p>
+  {% endif %}
+  <div class="tag-grid tag-grid--left">
+    {% if page.type %}<span class="chip">{{ page.type }}</span>{% endif %}
+    {% for keyword in page.keywords %}
+      <span class="chip">{{ keyword }}</span>
+    {% endfor %}
+  </div>
+  <div class="prose">
+    {{ content }}
+  </div>
+</article>
+

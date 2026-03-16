@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      {% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}
+    </title>
+    <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace }}">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [["$", "$"], ["\\(", "\\)"]],
+          displayMath: [["$$", "$$"], ["\\[", "\\]"]]
+        }
+      };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <div class="page-glow page-glow--left"></div>
+    <div class="page-glow page-glow--right"></div>
+    <header class="site-header">
+      <div class="shell site-header__inner">
+        <a href="{{ '/' | relative_url }}" class="site-brand">
+          <span class="site-brand__name">{{ site.title }}</span>
+          <span class="site-brand__tag">{{ site.author.role }}</span>
+        </a>
+        {% include site-nav.html %}
+      </div>
+    </header>
+
+    <main class="shell site-main">
+      {{ content }}
+    </main>
+
+    <footer class="site-footer shell">
+      <p>{{ site.title }}. Built with Jekyll for GitHub Pages.</p>
+      <p>
+        <a href="https://github.com/{{ site.author.github }}">GitHub</a>
+        <span class="footer-separator">/</span>
+        <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+      </p>
+    </footer>
+  </body>
+</html>
+

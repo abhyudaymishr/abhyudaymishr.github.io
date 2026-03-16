@@ -1,0 +1,73 @@
+---
+layout: default
+---
+<section class="hero">
+  <div class="hero__copy">
+    <p class="eyebrow">Research Profile</p>
+    <h1>{{ site.title }}</h1>
+    <p class="hero__lede">{{ site.author.role }}</p>
+    <div class="prose">
+      {{ content }}
+    </div>
+    <div class="hero__actions">
+      <a class="button button--primary" href="{{ '/projects/' | relative_url }}">View Projects</a>
+      <a class="button" href="{{ '/publications/' | relative_url }}">Read Publications</a>
+    </div>
+  </div>
+  <aside class="panel hero__panel">
+    <p class="panel__label">Current Focus</p>
+    <ul class="compact-list">
+      <li>Geometric neural operators for PDEs</li>
+      <li>Qudit and qutrit circuit design</li>
+      <li>Sparse local attention mechanisms</li>
+      <li>Scientific machine learning systems</li>
+    </ul>
+    <p class="panel__label">Working Equation</p>
+    <div class="math-block">
+      $$
+      \nabla \cdot u = 0, \qquad
+      \mathcal{G}_{\theta}: a(x) \mapsto u(x)
+      $$
+    </div>
+  </aside>
+</section>
+
+<section class="section-grid">
+  <article class="panel">
+    <p class="eyebrow">Selected Projects</p>
+    <div class="stack">
+      {% assign featured_projects = site.projects | sort: "order" %}
+      {% for project in featured_projects limit:3 %}
+        <a class="item-link" href="{{ project.url | relative_url }}">
+          <strong>{{ project.title }}</strong>
+          <span>{{ project.summary }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </article>
+
+  <article class="panel">
+    <p class="eyebrow">Recent Writing</p>
+    <div class="stack">
+      {% for post in site.posts limit:3 %}
+        <a class="item-link" href="{{ post.url | relative_url }}">
+          <strong>{{ post.title }}</strong>
+          <span>{{ post.date | date: "%B %-d, %Y" }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </article>
+</section>
+
+<section class="panel">
+  <p class="eyebrow">Research Themes</p>
+  <div class="tag-grid">
+    <span class="chip">Neural Operators</span>
+    <span class="chip">Quantum Computing</span>
+    <span class="chip">Scientific Machine Learning</span>
+    <span class="chip">Sparse Attention</span>
+    <span class="chip">Geometric Deep Learning</span>
+    <span class="chip">Operator Theory</span>
+  </div>
+</section>
+

@@ -1,0 +1,47 @@
+title: "Abhyuday Mishra"
+email: "abhymishrgkp@gmail.com"
+description: "Quantum Computing | Scientific Machine Learning"
+url: "https://abhyudaymishr.github.io"
+baseurl: ""
+timezone: "Asia/Kolkata"
+markdown: kramdown
+kramdown:
+  input: GFM
+  math_engine: mathjax
+permalink: /blog/:year/:month/:day/:title/
+
+author:
+  name: "Abhyuday Mishra"
+  affiliation: "NFSU Gandhinagar"
+  role: "Quantum Computing | Scientific Machine Learning"
+  summary: "Researching neural operators, sparse geometric learning, and higher-dimensional quantum circuit design."
+  github: "abhyudaymishr"
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:path/
+  publications:
+    output: true
+    permalink: /publications/:path/
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: page
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+  - scope:
+      path: ""
+      type: publications
+    values:
+      layout: publication
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
