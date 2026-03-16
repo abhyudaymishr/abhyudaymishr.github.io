@@ -288,6 +288,13 @@ h3 {
   gap: 0.9rem;
 }
 
+.link-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.15rem;
+}
+
 .item-link,
 .card-link {
   display: block;
@@ -383,6 +390,99 @@ h3 {
   margin-top: 1.4rem;
 }
 
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.95rem;
+  margin-top: 1rem;
+}
+
+.info-card,
+.publication-card,
+.image-card {
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.48);
+  border: 1px solid rgba(21, 34, 47, 0.08);
+}
+
+.info-card {
+  padding: 1rem 1.1rem;
+}
+
+.info-card strong {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-family: "Space Grotesk", "Helvetica Neue", sans-serif;
+}
+
+.publication-list {
+  display: grid;
+  gap: 1.1rem;
+  margin-top: 1.4rem;
+}
+
+.publication-card {
+  padding: 1.35rem;
+}
+
+.publication-card__title {
+  margin: 0;
+  font-family: "Space Grotesk", "Helvetica Neue", sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.25;
+}
+
+.publication-card__meta {
+  margin: 0.55rem 0 0;
+  color: var(--muted);
+}
+
+.publication-card__abstract {
+  margin: 0.9rem 0 0;
+}
+
+.publication-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.4rem 0 0;
+}
+
+.image-card {
+  margin: 0;
+  overflow: hidden;
+}
+
+.image-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.image-card figcaption {
+  padding: 0.9rem 1rem 1rem;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.note-block {
+  margin-top: 1.5rem;
+  padding: 1rem 1.1rem;
+  border-radius: 18px;
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
 .site-footer {
   display: flex;
   justify-content: space-between;
@@ -407,7 +507,9 @@ h3 {
 @media (max-width: 900px) {
   .hero,
   .section-grid,
-  .cards {
+  .cards,
+  .info-grid,
+  .image-grid {
     grid-template-columns: 1fr;
   }
 
@@ -445,4 +547,3 @@ h3 {
     padding: 0.55rem 0.7rem;
   }
 }
-

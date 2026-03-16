@@ -15,6 +15,25 @@ A generalized quantum circuit simulation framework supporting **qudits**, or $d$
 
 Unlike conventional quantum simulators restricted to qubits with $d = 2$, this framework is aimed at circuits over arbitrary Hilbert space dimensions.
 
+<div class="image-grid">
+  <figure class="image-card">
+    <img src="https://scx2.b-cdn.net/gfx/news/2023/two-qudits-fully-entan.jpg" alt="Illustration of high-dimensional entanglement in a two-qudit system">
+    <figcaption>High-dimensional entanglement is one reason qudit-native simulation tools matter in practice.</figcaption>
+  </figure>
+  <figure class="image-card">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Quantum_Logic_Gates.png/500px-Quantum_Logic_Gates.png" alt="Diagram of quantum logic gates">
+    <figcaption>Generalized gate libraries extend familiar circuit logic beyond the qubit-only case.</figcaption>
+  </figure>
+  <figure class="image-card">
+    <img src="https://www.researchgate.net/publication/318729550/figure/fig3/AS%3A667647955972114%401536191085766/QFT-circuit-implemented-on-d-level-qudits.png" alt="QFT circuit implemented on d-level qudits">
+    <figcaption>The qudit quantum Fourier transform is a key target for generalized circuit design and algorithmic testing.</figcaption>
+  </figure>
+  <figure class="image-card">
+    <img src="https://miro.medium.com/v2/resize:fit:1200/1*DalQlJkwW9kijs8J6iLr0w.png" alt="Quantum circuit visualization">
+    <figcaption>Simulator ergonomics matter: abstractions should make high-dimensional circuits easy to inspect, compose, and optimize.</figcaption>
+  </figure>
+</div>
+
 ## Motivation
 
 Many physical quantum systems naturally expose more than two usable levels. Working with qudits can:
@@ -107,3 +126,13 @@ This framework supports experiments in:
 - qudit error correction
 - topological quantum computation
 - neural optimization of qudit circuits
+
+## Connection to the Broader Research Agenda
+
+This project connects directly to the rest of the site:
+
+- **quantum computing** through generalized circuit simulation and compilation
+- **topological methods** through braid- and algebra-inspired gate constructions
+- **machine learning** through neural optimization and search over circuit structure
+
+One especially interesting extension is a qudit-native transformer or graph model that proposes circuit simplifications or decompositions while respecting dimension-dependent gate algebra.
