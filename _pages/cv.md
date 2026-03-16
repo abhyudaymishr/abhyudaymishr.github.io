@@ -23,9 +23,9 @@ B.Tech-M.Tech in Computer Science and Engineering
 
 Geometry-aware sparse attention for operator learning on PDEs.
 
-### Qutrit Circuit Framework
+### Qudit Quantum Circuit Framework
 
-Higher-dimensional circuit abstractions for algorithm design and simulation.
+Higher-dimensional circuit abstractions for algorithm design and simulation across arbitrary local dimension $d$.
 
 ### Operator Learning for Fluids
 
@@ -37,4 +37,3 @@ Learning structured mappings for Navier-Stokes style systems.
 - Talks and posters
 - Awards and academic service
 - A downloadable PDF placed under `/files/`
-

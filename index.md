@@ -9,6 +9,5 @@ My current research direction centers on models that respect structure instead o
 Currently building:
 
 - **GOLA**: a geometric neural operator with sparse local attention
-- **Qutrit Circuit Framework**: tools for simulating and studying higher-dimensional quantum gates
+- **Qudit Quantum Circuit Framework**: tools for simulating and studying higher-dimensional quantum gates
 - **Neural Operators for Fluid Systems**: operator-learning pipelines for Navier-Stokes style problems
-

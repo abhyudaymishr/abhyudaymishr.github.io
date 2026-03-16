@@ -16,7 +16,7 @@ Many operator-learning problems inherit mesh structure, locality, and conservati
 
 ### Quantum Computing Beyond Qubits
 
-Qudit and qutrit systems create different tradeoffs in expressivity, synthesis, and hardware assumptions. I am exploring circuit frameworks and algorithmic tooling that make higher-dimensional quantum reasoning easier to test and compare.
+Qudit systems create different tradeoffs in expressivity, synthesis, and hardware assumptions. I am exploring circuit frameworks and algorithmic tooling that make higher-dimensional quantum reasoning easier to test and compare.
 
 ### Scientific Machine Learning Systems
 
@@ -26,7 +26,7 @@ The research goal is not only to propose ideas but to build robust experimental 
 
 - When does locality beat full attention in operator learning?
 - How should geometry enter the attention mechanism instead of remaining a post-hoc feature?
-- What abstractions make qutrit circuit construction usable for experimentation?
+- What abstractions make general qudit circuit construction usable for experimentation?
 - Which operator-learning benchmarks reveal failure modes rather than hiding them?
 
 ## Mathematical Lens
@@ -38,4 +38,3 @@ $$
 $$
 
 where the key modeling decision is how architecture encodes the structure of the operator $\mathcal{G}$ rather than only fitting samples.
-
