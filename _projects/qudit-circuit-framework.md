@@ -1,9 +1,9 @@
 ---
 title: "Qudit Quantum Circuit Framework"
 permalink: /projects/qudit-circuit-framework/
-summary: "A generalized quantum circuit simulation framework for arbitrary d-dimensional systems, beyond qubit-only models."
-status: "Prototype"
-timeline: "2026"
+summary: "A group project on high-performance simulation for qudit systems, developed with Manav Seksaria and Anil Prabhakar."
+status: "Group project"
+timeline: "2025-2026"
 image: "https://scx2.b-cdn.net/gfx/news/2023/two-qudits-fully-entan.jpg"
 image_alt: "High-dimensional entanglement image for a qudit circuit framework"
 topics:
@@ -13,9 +13,9 @@ topics:
   - Generalized QFT
 order: 2
 ---
-A generalized quantum circuit simulation framework supporting **qudits**, or $d$-dimensional quantum systems.
+This work is a **group project** developed with **Manav Seksaria**, **Abhyuday Mishra**, and **Anil Prabhakar**.
 
-Unlike conventional quantum simulators restricted to qubits with $d = 2$, this framework is aimed at circuits over arbitrary Hilbert space dimensions.
+The project centers on **qudit**, a high-performance simulator for $d$-dimensional quantum systems. Unlike conventional simulators restricted to qubits with $d = 2$, it targets arbitrary local Hilbert-space dimensions and is motivated by practical simulation needs for higher-dimensional quantum computing.
 
 <div class="image-grid">
   <figure class="image-card">
@@ -43,6 +43,20 @@ Many physical quantum systems naturally expose more than two usable levels. Work
 - increase information density per site
 - reduce circuit depth in some constructions
 - improve fault-tolerance tradeoffs on suitable hardware
+
+## Collaboration and Publication
+
+This simulator effort is not presented here as individual work. It is a collaborative project with:
+
+- Manav Seksaria
+- Abhyuday Mishra
+- Anil Prabhakar
+
+The corresponding publication on the site is:
+
+- **qudit: High-Performance Simulator for Qudit Systems**
+- Venue: **2025 Supercomputing India (SCI)**
+- eCF Paper Id: `scindia2025__pap367`
 
 ## Mathematical Representation
 

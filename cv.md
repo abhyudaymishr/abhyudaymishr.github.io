@@ -62,7 +62,7 @@ B.Tech-M.Tech in Computer Science and Engineering
   <article class="publication-card">
     <p class="eyebrow">Quantum Computing</p>
     <h3 class="publication-card__title">Qudit Quantum Circuit Framework</h3>
-    <p class="publication-card__abstract">Higher-dimensional circuit abstractions for algorithm design and simulation across arbitrary local dimension $d$, including generalized gates and qudit QFT structures.</p>
+    <p class="publication-card__abstract">Group project on high-performance simulation for qudit systems, developed with Manav Seksaria and Anil Prabhakar and connected to the SCI 2025 paper <em>qudit: High-Performance Simulator for Qudit Systems</em>.</p>
   </article>
   <article class="publication-card">
     <p class="eyebrow">Scientific Systems</p>
