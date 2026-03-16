@@ -104,9 +104,6 @@
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   </head>
   <body>
-    {% if site.repo_url and page.path %}
-      {% assign edit_url = site.repo_url | append: '/edit/' | append: site.repo_branch | append: '/' | append: page.path %}
-    {% endif %}
     <div class="page-glow page-glow--left"></div>
     <div class="page-glow page-glow--right"></div>
     <header class="site-header">
@@ -119,14 +116,6 @@
       </div>
     </header>
 
-    {% if edit_url %}
-      <div class="shell">
-        <div class="edit-bar">
-          <a class="edit-bar__link" href="{{ edit_url }}">Edit This Page</a>
-        </div>
-      </div>
-    {% endif %}
-
     <main class="shell site-main">
       {{ content }}
     </main>
@@ -136,10 +125,6 @@
       <p>
         <a href="https://github.com/{{ site.author.github }}">GitHub</a>
         <span class="footer-separator">/</span>
-        {% if edit_url %}
-          <a href="{{ edit_url }}">Edit current page</a>
-          <span class="footer-separator">/</span>
-        {% endif %}
         <a href="mailto:{{ site.email }}">{{ site.email }}</a>
       </p>
     </footer>

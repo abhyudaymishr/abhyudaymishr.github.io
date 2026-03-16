@@ -5,11 +5,8 @@ description: "Research portfolio of Abhyuday Mishra covering quantum computing, 
 ---
 I am a B.Tech-M.Tech CSE student at **NFSU Gandhinagar** working at the intersection of quantum computing, scientific machine learning, and topological learning.
 
-My current research direction centers on models that respect structure instead of treating physics as generic sequence data. That means sparse geometry-aware attention for PDE operators, qudit circuit constructions beyond qubits, and knot-type recognition from diagrams, braids, and geometric embeddings.
+My broader research spans quantum computing, scientific machine learning, and geometry-aware learning systems. My current active project is **GOLA**, where the goal is to learn one-step PDE time-advance operators using geometry-induced sparse attention instead of dense global token mixing.
 
-Currently building:
+Current project:
 
-- **GOLA**: a geometric neural operator with sparse local attention
-- **Qudit Quantum Circuit Framework**: a group project on high-performance simulation for qudit systems
-- **Knot-Type Recognition**: a hybrid image-classification and Gauss/PD extraction pipeline for knot analysis
-- **Neural Operators for Fluid Systems**: operator-learning pipelines for Navier-Stokes style problems
+- **GOLA — Geometric Neural Operator with Sparse Local Attention**: a formal operator-learning scaffold for Navier-Stokes style systems with geometry graphs, sparse attention, and physics-aware losses
