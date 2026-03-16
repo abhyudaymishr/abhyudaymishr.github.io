@@ -4,6 +4,8 @@ description: "Quantum Computing | Scientific Machine Learning"
 url: "https://abhyudaymishr.github.io"
 baseurl: ""
 timezone: "Asia/Kolkata"
+repo_url: "https://github.com/abhyudaymishr/abhyudaymishr.github.io"
+repo_branch: "main"
 markdown: kramdown
 kramdown:
   input: GFM
