@@ -12,4 +12,3 @@ intro: "Short research essays on operator theory, sparse attention, and quantum 
     </a>
   {% endfor %}
 </div>
-

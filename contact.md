@@ -16,4 +16,3 @@ intro: "Ways to reach me and places to follow ongoing work."
 - A lab or institutional page if available
 
 If you want this page to be fully publishable immediately, replace the placeholder email address in `_config.yml` and here.
-

@@ -13,4 +13,3 @@ intro: "Research systems and prototypes spanning operator learning, quantum circ
     </a>
   {% endfor %}
 </div>
-
