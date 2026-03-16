@@ -1,6 +1,6 @@
 ---
 title: "Learning Knot Invariants with Neural Networks"
-date: 2026-03-16
+date: 2026-02-01
 ---
 Knot recognition can be viewed as a classification problem over topological embeddings, diagrams, and braid representations.
 
