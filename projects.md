@@ -2,7 +2,7 @@
 title: Projects
 permalink: /projects/
 kicker: Build
-intro: "Research systems and prototypes spanning operator learning, quantum circuits, and ML infrastructure."
+intro: "Research systems and prototypes spanning operator learning, quantum circuits, topology, and efficient ML, each paired with a reflective research note."
 ---
 {% assign ordered_projects = site.projects | sort: "order" %}
 <div class="cards">

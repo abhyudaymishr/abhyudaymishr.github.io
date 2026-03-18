@@ -98,3 +98,13 @@ That makes the next research steps clear: stronger invariant-level baselines, be
 ## Source Project
 
 Repository: [github.com/abhyudaymishr/knot_recognition](https://github.com/abhyudaymishr/knot_recognition)
+
+## Philosophical Lens
+
+Topology always carries a philosophical question: what remains identical when appearance changes? From Gauss through Poincare, the mathematical problem is invariance under deformation. For machine learning, the same issue becomes methodological: should a model classify a knot from surface appearance alone, or should it also be given access to the structure that survives redrawing, projection, and simplification?
+
+This project takes the second path. In an Advaita-like interpretive register, the visible diagram is the changing appearance, while the invariant is closer to the stable object of knowledge. The goal is not to replace topology with a neural network, but to make learning answer to topology.
+
+## Related Note
+
+For the corresponding essay, see [Learning Knot Invariants with Neural Networks]({{ '/blog/2026/02/01/knot-learning/' | relative_url }}).

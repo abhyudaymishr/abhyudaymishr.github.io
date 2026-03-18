@@ -86,3 +86,13 @@ The repository supports:
 ## Why This Version Matters
 
 The main design claim is that operator learning for PDEs should scale like \(O(Nk)\) with local neighborhoods rather than \(O(N^2)\) dense attention, while still preserving the geometric inductive bias needed for physical systems.
+
+## Philosophical Lens
+
+A Newtonian way to read this project is that the form of a law matters. In classical mechanics, motion is not explained by an arbitrary table of outputs but by a structured relation between bodies, forces, and change. GOLA applies the same discipline to operator learning: if the underlying PDE is local, geometry-bound, and conservation-sensitive, then the architecture should encode those commitments rather than hope that a dense model rediscovers them by accident.
+
+Under that view, sparse attention is not only a computational shortcut. It is a statement about what counts as a serious scientific hypothesis. The model is asked to learn within the geometry of the problem, not outside it.
+
+## Related Note
+
+For a shorter essay on the same idea, see [Why Geometry Matters in Operator Learning]({{ '/blog/2026/03/16/geometry-and-operator-learning/' | relative_url }}).

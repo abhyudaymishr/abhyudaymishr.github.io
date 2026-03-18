@@ -2,7 +2,7 @@
 title: Blog
 permalink: /blog/
 kicker: Notes
-intro: "Short research essays on operator theory, sparse attention, and quantum abstractions."
+intro: "Technical notes and philosophical research essays on operator learning, quantum systems, topology, and model-building."
 ---
 <div class="cards">
   {% for post in site.posts %}

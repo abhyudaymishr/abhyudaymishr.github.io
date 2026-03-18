@@ -152,3 +152,13 @@ This project connects directly to the rest of the site:
 - **machine learning** through neural optimization and search over circuit structure
 
 One especially interesting extension is a qudit-native transformer or graph model that proposes circuit simplifications or decompositions while respecting dimension-dependent gate algebra.
+
+## Philosophical Lens
+
+There is a useful intellectual bridge here between Schrödinger's openness to Vedantic thought and Shankaracharya's insistence that apparent multiplicity does not necessarily imply ultimate fragmentation. In an imagined Shankaracharya-meets-Schrödinger dialogue, the lesson for this project would be methodological rather than mystical: higher-dimensional structure should not be flattened too early simply because binary language is convenient.
+
+A qudit simulator takes the formal richness of the Hilbert space seriously instead of reducing it immediately to qubit-first habits. The project is therefore not only about faster or broader simulation. It is also about resisting an impoverished representation of the problem.
+
+## Related Note
+
+For the shorter research essay version, see [Why Qudits Are Worth Building Tools For]({{ '/blog/2026/03/10/why-qudits-matter/' | relative_url }}).
