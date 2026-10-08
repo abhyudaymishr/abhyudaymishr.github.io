@@ -3,4 +3,6 @@ _site/
 .sass-cache/
 .bundle/
 vendor/
+*.app
+
 
