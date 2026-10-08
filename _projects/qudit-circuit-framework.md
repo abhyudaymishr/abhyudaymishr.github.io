@@ -11,7 +11,7 @@ topics:
   - Qudits
   - Circuit Simulation
   - Generalized QFT
-order: 2
+order: 3
 ---
 This page describes a **group project** developed with **Manav Seksaria**, **Abhyuday Mishra**, and **Anil Prabhakar**. I want to state that clearly at the start because I do not want the site to turn collaborative work into an individual claim. The simulator and the publication belong to a shared research effort, and that matters to me both ethically and intellectually. In quantum computing especially, a lot of the interesting work sits at the intersection of physics, mathematics, and systems engineering, so it makes sense that the project itself emerged through collaboration.
 

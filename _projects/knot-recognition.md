@@ -11,7 +11,7 @@ topics:
   - Knot Theory
   - Geometric Learning
   - Quantum Topology
-order: 3
+order: 4
 ---
 This project grew out of a question I find more interesting than the standard “can a neural network classify images?” version of the problem. In knot theory, the real issue is not simply recognizing a picture. The issue is identifying what stays invariant when the picture changes. A knot diagram can be stretched, redrawn, simplified, projected differently, or drawn with a different hand, while still representing the same topological object. So if I only train a model to classify images by visual pattern, I have not actually met the problem on its own terms. I may have built a competent image classifier, but not a serious knot-analysis system.
 

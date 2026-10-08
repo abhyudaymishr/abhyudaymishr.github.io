@@ -15,6 +15,8 @@ keywords:
   - Qudits
   - Knot Theory
   - Topological Learning
+  - Spatiotemporal ML
+  - Model Context Protocol
 markdown: kramdown
 kramdown:
   input: GFM

@@ -9,7 +9,7 @@ intro: "Machine learning and research engineering resume."
 
 ## Professional Summary
 
-Machine learning and research engineering candidate pursuing an integrated B.Tech-M.Tech in Computer Science and Engineering. Built a 2.1M-parameter language model that beat an n-gram baseline by 41%, developed a knot-recognition pipeline that reached 98% accuracy, and contributed to a qudit simulator later accepted at SCI 2025. Seeking ML and research internships focused on model development, evaluation, and scientific computing.
+Machine learning and research engineering candidate pursuing an integrated B.Tech-M.Tech in Computer Science and Engineering. Built an end-to-end spatiotemporal hotspot forecasting engine and MCP server across 240k+ records, developed a 2.1M-parameter language model that beat an n-gram baseline by 41%, and contributed to a qudit simulator accepted at SCI 2025. Seeking ML and research internships focused on model development, evaluation, and scientific computing.
 
 ## Education
 
@@ -20,8 +20,8 @@ Gandhinagar, Gujarat, India | Expected May 2027
 ## Technical Skills
 
 - **Programming:** Python, C, C++, Cython, SQL
-- **Machine Learning:** PyTorch, TensorFlow, Scikit-learn, Pandas, Keras, NLP, computer vision, graph neural networks
-- **Scientific Computing:** NumPy, SciPy, benchmarking, experiment pipelines, reproducibility
+- **Machine Learning & Systems:** PyTorch, TensorFlow, Scikit-learn, Pandas, FastAPI, Gradio, Model Context Protocol (MCP), NLP, computer vision, graph neural networks, spatiotemporal forecasting
+- **Scientific Computing:** NumPy, SciPy, optimal transport (Wasserstein), benchmarking, experiment pipelines, reproducibility
 - **Quantum and Systems:** Qiskit, PennyLane, Cirq, QuTiP, OpenMP, PBS, SLURM
 - **Research Tools:** LaTeX, technical writing, presentations, literature review, collaborative research
 
@@ -36,6 +36,14 @@ Chennai, India | May 2025 to July 2025
 - Supported a collaborative research effort later accepted at the Supercomputing India Conference (SCI 2025)
 
 ## Selected Projects
+
+### Oculon: Spatiotemporal Hotspot Forecasting & MCP Server
+
+**Tech:** Python, PyTorch, FastAPI, Gradio 5, Model Context Protocol (MCP), Spatiotemporal ML, Optimal Transport
+
+- Engineered an end-to-end spatiotemporal hotspot forecasting engine and MCP server across 240k+ public safety records in Delhi, deployed live on Hugging Face Spaces and published on PyPI (`oculon`)
+- Implemented an expanding-window rolling-origin evaluation protocol to eliminate temporal data leakage, achieving 0.64 mean average precision (mAP) and 1.22 km Wasserstein $W_1$ optimal transport distance
+- Built remote SSE and local stdio MCP tool interfaces enabling LLM agents (Claude Desktop, Cursor) to query hotspot probabilities, stream metrics, and launch full-resolution maps
 
 ### NanoTransformer
 

@@ -7,7 +7,7 @@ topics:
   - Scientific ML
   - Navier-Stokes
   - Reproducible Systems
-order: 4
+order: 5
 ---
 I keep this project page separate from GOLA because I do not want a single architecture to stand in for the whole research problem. GOLA is one concrete design inside a broader question that has been occupying me for a while: how should operator-learning systems for incompressible fluid dynamics actually be studied if the goal is scientific understanding rather than benchmark theater? That broader question deserves its own page because the model is only one part of the story. Datasets, rollout protocols, ablations, baselines, preprocessing decisions, and memory constraints all shape what kind of conclusion one is allowed to draw.
 

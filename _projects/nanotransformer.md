@@ -7,7 +7,7 @@ topics:
   - Language Models
   - Systems Engineering
   - Efficient Training
-order: 5
+order: 6
 ---
 NanoTransformer looks like an outlier on this site at first glance, and that is reasonable. Most of my work here sits much closer to scientific machine learning, quantum systems, topology, or structured operators. A small language model project seems like it belongs to a different world. But I keep it here because, in a less obvious way, it is driven by the same research instinct as the rest of the portfolio: I want systems that I can fully inspect. I want experiments whose internal structure I actually understand. And I want the implementation to be honest enough that success or failure teaches me something rather than just producing a nice-looking number.
 
