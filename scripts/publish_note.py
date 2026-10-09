@@ -130,17 +130,27 @@ def extract_title_and_body(raw_text: str):
     """
     Extracts title and cleans body.
     Supports markdown headers, Apple Notes titles, or raw text.
+    Never treats publish tags as title.
     """
     # Replace non-standard unicode line breaks from Apple Notes
     cleaned_text = raw_text.replace('\u2028', '\n').replace('\u2029', '\n').strip()
-    lines = [line.rstrip() for line in cleaned_text.split('\n')]
+    raw_lines = [line.rstrip() for line in cleaned_text.split('\n')]
     
+    # Filter out empty lines AND lines that are solely tags like #Publish or #Published
+    lines = []
+    for line in raw_lines:
+        trimmed = line.strip()
+        # If line is solely a publish tag (e.g. #Publish, #Published, #Published (2026-10-09))
+        if re.match(r'^(#|\s*)*publish(ed)?(\s*\(.*?\))?\s*$', trimmed, re.IGNORECASE):
+            continue
+        lines.append(line)
+
     # Drop leading empty lines
     while lines and not lines[0].strip():
         lines.pop(0)
 
     if not lines:
-        return "Untitled Post", ""
+        return "Untitled Note", ""
 
     first_line = lines[0].strip()
     
@@ -155,9 +165,9 @@ def extract_title_and_body(raw_text: str):
     # Strip quote marks if wrapped
     title = title.strip('"\'')
 
-    # Remove #Publish or #publish tag from body
+    # Remove any stray #Publish or #Published tags from body
     body_text = '\n'.join(remaining_lines).strip()
-    body_text = re.sub(r'(?i)#publish\b[^\n]*', '', body_text).strip()
+    body_text = re.sub(r'(?i)#publish(ed)?\b(\s*\(.*?\))?[^\n]*', '', body_text).strip()
     # Strip any consecutive blank lines
     body_text = re.sub(r'\n{3,}', '\n\n', body_text).strip()
 
@@ -166,39 +176,10 @@ def extract_title_and_body(raw_text: str):
 
 def find_publishable_notes():
     """
-    Queries Apple Notes for notes with tag '#Publish' or '#publish'.
-    Returns list of dicts: [{'id': ..., 'name': ..., 'body': ..., 'plaintext': ...}]
+    Queries Apple Notes for notes with tag '#Publish' (excluding already #Published).
+    Returns list of dicts: [{'id': ..., 'name': ..., 'text': ...}]
     """
-    ascript = '''
-    tell application "Notes"
-        set matched to (every note whose plaintext contains "#Publish" or plaintext contains "#publish" or body contains "#Publish" or body contains "#publish")
-        set outList to {}
-        repeat with n in matched
-            set noteID to (id of n as string)
-            set noteName to (name of n as string)
-            set notePlain to (plaintext of n as string)
-            set noteHTML to (body of n as string)
-            set end of outList to noteID & "|||NOTE_DELIM|||" & noteName & "|||NOTE_DELIM|||" & notePlain & "|||NOTE_DELIM|||" & noteHTML
-        end repeat
-        return outList
-    end tell
-    '''
-    res = subprocess.run(['osascript', '-e', ascript], capture_output=True, text=True)
-    if res.returncode != 0:
-        print(f"Error querying Apple Notes: {res.stderr}", file=sys.stderr)
-        return []
-
-    output = res.stdout.strip()
-    if not output:
-        return []
-
-    notes = []
-    # osascript returns list separated by comma + space
-    # Split by delimiter
-    raw_entries = output.split("|||NOTE_DELIM|||")
-    # Actually AppleScript returns items separated by ", "
-    # Let's do a reliable structured extraction in Python
-    # We can fetch notes by ID
+    # Query Apple Notes for notes containing #Publish or #publish
     get_ids_script = '''
     tell application "Notes"
         set matched to (every note whose plaintext contains "#Publish" or plaintext contains "#publish" or body contains "#Publish" or body contains "#publish")
@@ -214,9 +195,9 @@ def find_publishable_notes():
         return []
 
     raw_ids = [i.strip() for i in id_res.stdout.strip().split(", ") if i.strip()]
+    notes = []
 
     for note_id in raw_ids:
-        # Fetch individual note properties safely
         fetch_script = f'''
         tell application "Notes"
             set n to (note id "{note_id}")
@@ -226,10 +207,16 @@ def find_publishable_notes():
         f_res = subprocess.run(['osascript', '-e', fetch_script], capture_output=True, text=True)
         if f_res.returncode == 0 and "___DELIM___" in f_res.stdout:
             parts = f_res.stdout.split("___DELIM___", 1)
+            note_text = parts[1]
+            
+            # STRICT CHECK: Must contain '#publish' as a standalone tag, NOT followed by 'ed'
+            if not re.search(r'#publish\b(?!ed)', note_text, re.IGNORECASE):
+                continue
+
             notes.append({
                 'id': note_id,
                 'name': parts[0].strip(),
-                'text': parts[1]
+                'text': note_text
             })
 
     return notes
@@ -237,36 +224,42 @@ def find_publishable_notes():
 
 def mark_note_as_published(note_id: str, post_filename: str):
     """
-    Updates the note in Apple Notes: replaces '#Publish' with '#Published (YYYY-MM-DD)'.
+    Updates the note in Apple Notes: precisely replaces '#Publish' with '#Published (YYYY-MM-DD)'.
+    Never touches '#Published'.
     """
     today_str = datetime.date.today().strftime("%Y-%m-%d")
     tag_replacement = f"#Published ({today_str})"
     
-    ascript = f'''
+    # Fetch note body
+    fetch_script = f'''
+    tell application "Notes"
+        set n to (note id "{note_id}")
+        return body of n as string
+    end tell
+    '''
+    f_res = subprocess.run(['osascript', '-e', fetch_script], capture_output=True, text=True)
+    if f_res.returncode != 0:
+        return
+
+    cur_body = f_res.stdout
+    # Regex replace only #publish not followed by ed
+    new_body = re.sub(r'(?i)#publish\b(?!ed)', tag_replacement, cur_body)
+
+    # Escape quotes and backslashes for AppleScript
+    escaped_body = new_body.replace('\\', '\\\\').replace('"', '\\"')
+
+    update_script = f'''
     tell application "Notes"
         try
             set n to (note id "{note_id}")
-            set curBody to (body of n as string)
-            
-            -- Replace #Publish or #publish in HTML body
-            set AppleScript's text item delimiters to "#Publish"
-            set bodyParts to text items of curBody
-            set AppleScript's text item delimiters to "{tag_replacement}"
-            set curBody to bodyParts as text
-            
-            set AppleScript's text item delimiters to "#publish"
-            set bodyParts to text items of curBody
-            set AppleScript's text item delimiters to "{tag_replacement}"
-            set curBody to bodyParts as text
-            
-            set body of n to curBody
+            set body of n to "{escaped_body}"
             return "ok"
         on error errStr
             return errStr
         end try
     end tell
     '''
-    subprocess.run(['osascript', '-e', ascript], capture_output=True, text=True)
+    subprocess.run(['osascript', '-e', update_script], capture_output=True, text=True)
 
 
 def notify_mac(title: str, message: str):
