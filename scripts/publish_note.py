@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 """
-Blog Publishing Automation for abhyudaymishr.github.io
+Blog Publishing & Sync Automation for abhyudaymishr.github.io
 Pipeline:
   Blog Ideas (Apple Notes)
        ↓
-  Write normally
+  Write or Edit note
        ↓
-  Add "#Publish" tag
+  Add "#Publish" or "#Update" tag
        ↓
-  Mac Shortcut (or run scripts/publish_note.py)
+  Mac Shortcut (or run scripts/publish.sh)
        ↓
-  Creates: _posts/YYYY-MM-DD-my-blog-post.md
+  Updates existing post OR creates new: _posts/YYYY-MM-DD-my-blog-post.md
        ↓
   git push
        ↓
-  GitHub (GitHub Actions CI/CD)
+  GitHub Actions CI/CD
        ↓
   abhyudaymishr.github.io/blog
 """
@@ -40,7 +40,7 @@ class HTMLToMarkdown(HTMLParser):
         self.result = []
         self.in_title_h1 = False
         self.title = None
-        self.list_stack = []  # 'ul' or 'ol'
+        self.list_stack = []
         self.ol_counters = []
 
     def handle_starttag(self, tag, attrs):
@@ -58,7 +58,7 @@ class HTMLToMarkdown(HTMLParser):
             self.result.append('\n```\n')
         elif tag == 'a':
             href = attrs_dict.get('href', '')
-            self.result.append(f"[")
+            self.result.append("[")
             self._current_href = href
         elif tag == 'ul':
             self.list_stack.append('ul')
@@ -111,9 +111,7 @@ class HTMLToMarkdown(HTMLParser):
 
     def get_markdown(self):
         text = ''.join(self.result)
-        # Normalize double bold marks (Apple Notes sometimes nests <b><b>)
         text = re.sub(r'\*{4,}', '**', text)
-        # Normalize multiple line breaks
         text = re.sub(r'\n{3,}', '\n\n', text)
         return text.strip()
 
@@ -130,18 +128,16 @@ def extract_title_and_body(raw_text: str):
     """
     Extracts title and cleans body.
     Supports markdown headers, Apple Notes titles, or raw text.
-    Never treats publish tags as title.
+    Never treats publish or update tags as title.
     """
-    # Replace non-standard unicode line breaks from Apple Notes
     cleaned_text = raw_text.replace('\u2028', '\n').replace('\u2029', '\n').strip()
     raw_lines = [line.rstrip() for line in cleaned_text.split('\n')]
-    
-    # Filter out empty lines AND lines that are solely tags like #Publish or #Published
+
+    # Filter out empty lines and lines that are solely tags like #Publish, #Published, #Update
     lines = []
     for line in raw_lines:
         trimmed = line.strip()
-        # If line is solely a publish tag (e.g. #Publish, #Published, #Published (2026-10-09))
-        if re.match(r'^(#|\s*)*publish(ed)?(\s*\(.*?\))?\s*$', trimmed, re.IGNORECASE):
+        if re.match(r'^(#|\s*)*(publish(ed)?|update(d)?)(\s*\(.*?\))?\s*$', trimmed, re.IGNORECASE):
             continue
         lines.append(line)
 
@@ -153,7 +149,7 @@ def extract_title_and_body(raw_text: str):
         return "Untitled Note", ""
 
     first_line = lines[0].strip()
-    
+
     # Check if first line is a markdown header
     if first_line.startswith('#'):
         title = re.sub(r'^#+\s*', '', first_line).strip()
@@ -162,27 +158,94 @@ def extract_title_and_body(raw_text: str):
         title = first_line
         remaining_lines = lines[1:]
 
-    # Strip quote marks if wrapped
     title = title.strip('"\'')
 
-    # Remove any stray #Publish or #Published tags from body
+    # Remove any stray publish or update tags anywhere in body
     body_text = '\n'.join(remaining_lines).strip()
-    body_text = re.sub(r'(?i)#publish(ed)?\b(\s*\(.*?\))?[^\n]*', '', body_text).strip()
-    # Strip any consecutive blank lines
+    body_text = re.sub(r'(?i)#(publish(ed)?|update(d)?)\b(\s*\(.*?\))?[^\n]*', '', body_text).strip()
     body_text = re.sub(r'\n{3,}', '\n\n', body_text).strip()
 
     return title, body_text
 
 
+def get_existing_posts():
+    """
+    Parses existing posts in _posts/ directory.
+    Returns list of dicts with metadata for matching.
+    """
+    posts = []
+    if not POSTS_DIR.exists():
+        return posts
+
+    for path in sorted(POSTS_DIR.glob("*.md")):
+        content = path.read_text(encoding='utf-8')
+        # Extract YAML front matter
+        fm_match = re.search(r'^---\s*\n(.*?)\n---', content, re.DOTALL)
+        if not fm_match:
+            continue
+        fm_text = fm_match.group(1)
+
+        title_match = re.search(r'^title:\s*["\']?(.*?)["\']?\s*$', fm_text, re.MULTILINE)
+        date_match = re.search(r'^date:\s*["\']?(\d{4}-\d{2}-\d{2})["\']?\s*$', fm_text, re.MULTILINE)
+        note_id_match = re.search(r'^note_id:\s*["\']?(.*?)["\']?\s*$', fm_text, re.MULTILINE)
+
+        title = title_match.group(1) if title_match else ""
+        date = date_match.group(1) if date_match else ""
+        note_id = note_id_match.group(1) if note_id_match else ""
+
+        # Extract slug from filename (strip YYYY-MM-DD-)
+        filename_slug = re.sub(r'^\d{4}-\d{2}-\d{2}-', '', path.stem)
+
+        posts.append({
+            'file_path': path,
+            'filename': path.name,
+            'title': title,
+            'date': date,
+            'note_id': note_id,
+            'slug': filename_slug,
+        })
+
+    return posts
+
+
+def find_matching_post(note_id: str, title: str, existing_posts: list):
+    """
+    Searches for an existing post that matches this note:
+    1. By note_id (highest confidence)
+    2. By title slug match
+    3. By filename slug match
+    """
+    target_slug = slugify(title)
+
+    # 1. Match by note_id
+    if note_id:
+        for p in existing_posts:
+            if p['note_id'] and p['note_id'] == note_id:
+                return p
+
+    # 2. Match by title slug
+    if target_slug:
+        for p in existing_posts:
+            if p['title'] and slugify(p['title']) == target_slug:
+                return p
+
+    # 3. Match by filename slug
+    if target_slug:
+        for p in existing_posts:
+            if p['slug'] and p['slug'] == target_slug:
+                return p
+
+    return None
+
+
 def find_publishable_notes():
     """
-    Queries Apple Notes for notes with tag '#Publish' (excluding already #Published).
+    Queries Apple Notes for notes with tag '#Publish' or '#Update' (excluding already '#Published').
     Returns list of dicts: [{'id': ..., 'name': ..., 'text': ...}]
     """
-    # Query Apple Notes for notes containing #Publish or #publish
     get_ids_script = '''
     tell application "Notes"
-        set matched to (every note whose plaintext contains "#Publish" or plaintext contains "#publish" or body contains "#Publish" or body contains "#publish")
+        set matched to (every note whose plaintext contains "#Publish" or plaintext contains "#publish" or plaintext contains "#Update" or plaintext contains "#update" or body contains "#Publish" or body contains "#publish" or body contains "#Update" or body contains "#update")
         set idList to {}
         repeat with n in matched
             set end of idList to (id of n as string)
@@ -208,9 +271,9 @@ def find_publishable_notes():
         if f_res.returncode == 0 and "___DELIM___" in f_res.stdout:
             parts = f_res.stdout.split("___DELIM___", 1)
             note_text = parts[1]
-            
-            # STRICT CHECK: Must contain '#publish' as a standalone tag, NOT followed by 'ed'
-            if not re.search(r'#publish\b(?!ed)', note_text, re.IGNORECASE):
+
+            # STRICT CHECK: Must contain '#publish' or '#update' as a tag, NOT followed by 'ed' or 'd'
+            if not re.search(r'#(publish|update)\b(?!ed|d)', note_text, re.IGNORECASE):
                 continue
 
             notes.append({
@@ -222,15 +285,14 @@ def find_publishable_notes():
     return notes
 
 
-def mark_note_as_published(note_id: str, post_filename: str):
+def mark_note_as_published(note_id: str, is_update: bool = False):
     """
-    Updates the note in Apple Notes: precisely replaces '#Publish' with '#Published (YYYY-MM-DD)'.
-    Never touches '#Published'.
+    Updates the note in Apple Notes: replaces '#Publish' or '#Update' with
+    '#Published (YYYY-MM-DD)' or '#Published (updated YYYY-MM-DD)'.
     """
     today_str = datetime.date.today().strftime("%Y-%m-%d")
-    tag_replacement = f"#Published ({today_str})"
-    
-    # Fetch note body
+    tag_replacement = f"#Published (updated {today_str})" if is_update else f"#Published ({today_str})"
+
     fetch_script = f'''
     tell application "Notes"
         set n to (note id "{note_id}")
@@ -242,10 +304,9 @@ def mark_note_as_published(note_id: str, post_filename: str):
         return
 
     cur_body = f_res.stdout
-    # Regex replace only #publish not followed by ed
-    new_body = re.sub(r'(?i)#publish\b(?!ed)', tag_replacement, cur_body)
+    # Regex replace only #publish or #update not followed by ed/d
+    new_body = re.sub(r'(?i)#(publish|update)\b(?!ed|d)', tag_replacement, cur_body)
 
-    # Escape quotes and backslashes for AppleScript
     escaped_body = new_body.replace('\\', '\\\\').replace('"', '\\"')
 
     update_script = f'''
@@ -270,86 +331,101 @@ def notify_mac(title: str, message: str):
     subprocess.run(['osascript', '-e', ascript], capture_output=True, text=True)
 
 
-def publish_post_content(raw_text: str, custom_date: str = None, dry_run: bool = False, push: bool = True):
+def publish_post_content(raw_text: str, note_id: str = None, custom_date: str = None, dry_run: bool = False, push: bool = True):
     """
-    Parses note content, creates markdown file in _posts, commits, and pushes.
+    Parses note content, creates or updates markdown file in _posts, commits, and pushes.
     """
     title, body = extract_title_and_body(raw_text)
-    
+
     if not title:
         print("❌ Error: Could not determine post title.")
         return None
 
-    post_date = custom_date or datetime.date.today().strftime("%Y-%m-%d")
-    slug = slugify(title)
-    if not slug:
-        slug = f"post-{post_date}"
+    today_str = datetime.date.today().strftime("%Y-%m-%d")
+    existing_posts = get_existing_posts()
+    matching_post = find_matching_post(note_id, title, existing_posts)
 
-    filename = f"{post_date}-{slug}.md"
-    file_path = POSTS_DIR / filename
+    is_update = matching_post is not None
 
-    # Escape title quotes for YAML
+    if is_update:
+        file_path = matching_post['file_path']
+        post_date = matching_post['date'] or custom_date or today_str
+        bound_note_id = note_id or matching_post.get('note_id', '')
+        action_verb = "Updated"
+        print(f"\n🔄 Existing Post Found (Updating In-Place):")
+        print(f"   Original File: _posts/{matching_post['filename']}")
+    else:
+        post_date = custom_date or today_str
+        slug = slugify(title) or f"post-{post_date}"
+        filename = f"{post_date}-{slug}.md"
+        file_path = POSTS_DIR / filename
+        bound_note_id = note_id or ""
+        action_verb = "Published"
+        print(f"\n📝 New Post Prepared:")
+        print(f"   Filename:      _posts/{filename}")
+
+    print(f"   Title:         {title}")
+    print(f"   Date:          {post_date}")
+    if is_update:
+        print(f"   Last Modified: {today_str}")
+
     escaped_title = title.replace('"', '\\"')
 
-    post_content = f"""---
-title: "{escaped_title}"
-date: {post_date}
----
-{body}
-"""
+    # Build Front Matter
+    front_matter_lines = [
+        "---",
+        f'title: "{escaped_title}"',
+        f'date: {post_date}',
+    ]
+    if is_update:
+        front_matter_lines.append(f'last_modified_at: {today_str}')
+    if bound_note_id:
+        front_matter_lines.append(f'note_id: "{bound_note_id}"')
+    front_matter_lines.append("---")
+    front_matter_lines.append(body + "\n")
 
-    print(f"\n📝 Post Prepared:")
-    print(f"   Title:    {title}")
-    print(f"   Date:     {post_date}")
-    print(f"   Filename: _posts/{filename}")
+    post_content = "\n".join(front_matter_lines)
 
     if dry_run:
-        print("\n--- [DRY RUN PREVIEW] ---")
+        print(f"\n--- [DRY RUN PREVIEW ({action_verb.upper()})] ---")
         print(post_content[:400] + ("..." if len(post_content) > 400 else ""))
-        print("-------------------------")
-        return filename
+        print("---------------------------------------")
+        return file_path.name
 
-    # Ensure _posts exists
     POSTS_DIR.mkdir(parents=True, exist_ok=True)
-
-    # Write file
     file_path.write_text(post_content, encoding='utf-8')
-    print(f"✅ Created: {file_path}")
+    print(f"✅ Saved: {file_path}")
 
     # Git operations
     if push:
         try:
-            # Stage
             subprocess.run(["git", "add", str(file_path)], cwd=REPO_DIR, check=True)
-            
-            # Commit
-            commit_msg = f"Publish: {title}"
+            commit_msg = f"{action_verb}: {title}"
             subprocess.run(["git", "commit", "-m", commit_msg], cwd=REPO_DIR, check=True)
             print(f"✅ Git committed: '{commit_msg}'")
 
-            # Push
             print("🚀 Pushing to GitHub (origin main)...")
             push_res = subprocess.run(["git", "push", "origin", "main"], cwd=REPO_DIR, capture_output=True, text=True)
             if push_res.returncode == 0:
                 print("✅ Successfully pushed to GitHub! CI/CD workflow triggered.")
-                notify_mac(title, f"Published to abhyudaymishr.github.io/blog")
+                notify_mac(title, f"{action_verb} on abhyudaymishr.github.io/blog")
             else:
                 print(f"⚠️ Git push failed: {push_res.stderr.strip()}")
-                print("💡 Check your GitHub authentication or run `git push origin main` manually.")
+                print("💡 Run `git push origin main` manually.")
                 notify_mac("Post committed locally", "Run `git push` to deploy to GitHub.")
         except subprocess.CalledProcessError as e:
             print(f"❌ Git error: {e}", file=sys.stderr)
 
-    return filename
+    return file_path.name
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Auto-publish notes to abhyudaymishr.github.io/blog")
-    parser.add_argument("--scan", action="store_true", help="Scan Apple Notes for notes with #Publish tag (Default)")
+    parser = argparse.ArgumentParser(description="Auto-publish & sync notes to abhyudaymishr.github.io/blog")
+    parser.add_argument("--scan", action="store_true", help="Scan Apple Notes for notes with #Publish or #Update tag (Default)")
     parser.add_argument("--stdin", action="store_true", help="Read note content from stdin (for Mac Shortcuts input)")
     parser.add_argument("--file", type=str, help="Read note content from a specific file")
     parser.add_argument("--date", type=str, help="Override date (format: YYYY-MM-DD)")
-    parser.add_argument("--no-push", action="store_true", help="Create post file without git commit/push")
+    parser.add_argument("--no-push", action="store_true", help="Create or update post without git commit/push")
     parser.add_argument("--dry-run", action="store_true", help="Preview post without saving or pushing")
 
     args = parser.parse_args()
@@ -373,25 +449,29 @@ def main():
         publish_post_content(content, custom_date=args.date, dry_run=args.dry_run, push=not args.no_push)
         return
 
-    # Mode 3 (Default): Scan Apple Notes for #Publish
-    print("🔍 Scanning Apple Notes for notes tagged with #Publish...")
+    # Mode 3 (Default): Scan Apple Notes
+    print("🔍 Scanning Apple Notes for notes tagged with #Publish or #Update...")
     notes = find_publishable_notes()
 
     if not notes:
-        print("ℹ️ No notes found with the '#Publish' tag.")
-        print("💡 In Apple Notes: Write your draft in 'Blog Ideas' and add '#Publish' when ready!")
-        notify_mac("No notes to publish", "Add #Publish tag to your draft in Apple Notes.")
+        print("ℹ️ No notes found with the '#Publish' or '#Update' tag.")
+        print("💡 In Apple Notes:")
+        print("   • To publish a new post: Add '#Publish'")
+        print("   • To update an existing post: Add '#Update' or '#Publish'")
         return
 
-    print(f"📋 Found {len(notes)} note(s) ready to publish:")
+    print(f"📋 Found {len(notes)} note(s) ready to sync:")
     for note in notes:
         print(f"   • {note['name']}")
 
     for note in notes:
-        filename = publish_post_content(note['text'], custom_date=args.date, dry_run=args.dry_run, push=not args.no_push)
+        existing_posts = get_existing_posts()
+        is_update = find_matching_post(note['id'], note['name'], existing_posts) is not None
+        filename = publish_post_content(note['text'], note_id=note['id'], custom_date=args.date, dry_run=args.dry_run, push=not args.no_push)
         if filename and not args.dry_run:
-            mark_note_as_published(note['id'], filename)
-            print(f"🏷️ Updated Apple Note tag to #Published")
+            mark_note_as_published(note['id'], is_update=is_update)
+            status_text = "#Published (updated)" if is_update else "#Published"
+            print(f"🏷️ Updated Apple Note tag to {status_text}")
 
 
 if __name__ == "__main__":

@@ -23,21 +23,26 @@ This automation connects your everyday writing notes to your published Jekyll bl
 
 ---
 
-## 1. How to Write & Publish
+## 1. How to Write, Publish & Update
 1. Open **Apple Notes** (on Mac, iPhone, or iPad).
 2. Write in your **Blog Ideas** folder or any note.
    - **First line**: Becomes the Post Title (e.g., `# Why Qudits Matter` or just `Why Qudits Matter`).
    - **Body**: Write your thoughts normally in markdown or standard text.
-3. When ready to publish, simply add `#Publish` anywhere in the note.
-4. Trigger your **Mac Shortcut** (or run `scripts/publish.sh`).
-5. What happens automatically:
-   - Finds the note with `#Publish`.
-   - Extracts the title, creates the clean URL slug, and formats the Jekyll front matter.
-   - Saves `_posts/YYYY-MM-DD-<slug>.md`.
-   - Updates the note tag in Apple Notes to `#Published (YYYY-MM-DD)` so it never duplicates.
-   - Runs `git add`, `git commit -m "Publish: <title>"`, and `git push origin main`.
-   - GitHub Actions automatically builds Jekyll and deploys to `abhyudaymishr.github.io/blog`.
-   - Displays a native macOS notification confirming publication.
+
+### To Publish a New Post:
+- Add the tag `#Publish` anywhere in the note.
+- Trigger your **Mac Shortcut** (or run `./scripts/publish.sh`).
+- Creates a new `_posts/YYYY-MM-DD-<slug>.md` file, pushes to GitHub, and tags the note as `#Published (YYYY-MM-DD)`.
+
+### To Update an Existing Post:
+- Edit the note in Apple Notes as much as you like.
+- When ready to sync changes, add the tag **`#Update`** (or change `#Published` back to **`#Publish`**).
+- Trigger your **Mac Shortcut** (or run `./scripts/publish.sh`).
+- The script automatically matches the note to the **existing blog post** and **updates it in-place**!
+  - It preserves the original post URL / permalink.
+  - Updates the content and adds `last_modified_at`.
+  - Commits as `Update: <Title>` and pushes to GitHub.
+  - Re-tags the note to `#Published (updated YYYY-MM-DD)`.
 
 ---
 
