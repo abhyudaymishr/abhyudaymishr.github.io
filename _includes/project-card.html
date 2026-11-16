@@ -1,7 +1,7 @@
 {% assign project = include.project %}
 <article class="project-card" data-project data-category="{{ project.category | escape }}">
   <a class="project-card__link" href="{{ project.url | relative_url }}">
-    <div class="project-card__media"><img src="{{ project.cover | default: '/assets/images/operators.svg' | relative_url }}" alt="{{ project.cover_alt | default: '' | escape }}" width="800" height="560" loading="lazy" decoding="async"><span class="project-card__status">{{ project.status }}</span></div>
+    <div class="project-card__media"><img src="{{ project.cover | default: '/assets/images/operators.svg' | relative_url }}" alt="{{ project.cover_alt | default: '' | escape }}" width="800" height="560" loading="lazy" decoding="async">{% if project.status %}<span class="project-card__status">{{ project.status }}</span>{% endif %}</div>
     <div class="project-card__body"><p class="eyebrow">{{ project.category | default: project.topics.first }}</p><h3>{{ project.short_title | default: project.title }}</h3><p>{{ project.card_summary | default: project.summary }}</p><span class="card-action">Explore project {% include icon.html name='arrow' %}</span></div>
   </a>
 </article>

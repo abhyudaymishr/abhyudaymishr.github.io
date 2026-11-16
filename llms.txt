@@ -20,7 +20,7 @@ Public research portfolio of {{ site.author.name }}, a B.Tech–M.Tech Computer 
 
 ## Projects
 
-{% assign projects = site.projects | sort: 'order' %}{% for project in projects %}- [{{ project.title }}]({{ project.url | absolute_url }}): {{ project.summary }} Status: {{ project.status }}.
+{% assign projects = site.projects | sort: 'order' %}{% for project in projects %}- [{{ project.title }}]({{ project.url | absolute_url }}): {{ project.summary }}{% if project.status %} Status: {{ project.status }}.{% endif %}
 {% endfor %}
 ## Publications
 
@@ -35,4 +35,4 @@ Public research portfolio of {{ site.author.name }}, a B.Tech–M.Tech Computer 
 
 ## Reading context
 
-GOLA is active research. A manuscript in preparation is not an accepted publication. Qudit simulation work is collaborative; authors are credited on its publication page. Project metrics are claims from the linked project descriptions and should be read with their evaluation context. This portfolio does not expose a live agent execution API.
+GOLA is a completed research project. Qudit simulation work is collaborative; authors are credited on its publication page. Project metrics are claims from the linked project descriptions and should be read with their evaluation context. This portfolio does not expose a live agent execution API.

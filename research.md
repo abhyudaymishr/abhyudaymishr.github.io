@@ -5,20 +5,20 @@ permalink: /research/
 kicker: Research
 intro: "Research centered on geometry-aware operator learning, with collaborative work in qudit simulation and topological machine learning."
 ---
-## Current Focus
+## Completed Work
 
 ### GOLA and Operator Learning
 
-My main active research direction is **GOLA**, a geometric neural operator for learning one-step PDE time-advance operators with sparse geometry-induced attention. The central design question is whether local geometric structure should be encoded directly in the operator architecture instead of being approximated through dense global token mixing.
+I completed **GOLA**, a geometric neural operator project for learning one-step PDE time-advance operators with sparse geometry-induced attention. The project explored whether local geometric structure should be encoded directly in the operator architecture instead of being approximated through dense global token mixing.
 
-In practical terms, this means working on:
+The work covered:
 
 - geometry-aware sparse neighborhoods
 - one-step operator learning for Navier-Stokes style systems
 - physics-aware losses such as divergence, energy, and enstrophy penalties
 - memory-bounded training setups that stay realistic on limited hardware
 
-The broader goal is to make operator-learning systems more faithful to the geometry and numerical structure of the physical problems they model.
+The project focused on making operator-learning systems more faithful to the geometry and numerical structure of the physical problems they model.
 
 ## Collaborative and Adjacent Directions
 

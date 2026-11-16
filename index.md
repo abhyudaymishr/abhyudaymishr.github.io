@@ -5,4 +5,4 @@ description: "Abhyuday Mishra’s research in scientific machine learning, geome
 ---
 I’m **Abhyuday Mishra**, a B.Tech–M.Tech Computer Science and Engineering student at **NFSU Gandhinagar**, working across scientific machine learning, quantum computing, and topology.
 
-My current focus is **GOLA**: learning PDE time-advance operators through geometry-induced sparse attention. Alongside that work, I build research software for qudit simulation, spatiotemporal forecasting, and knot recognition.
+My completed work on **GOLA** explored learning PDE time-advance operators through geometry-induced sparse attention. I also build research software for qudit simulation, spatiotemporal forecasting, and knot recognition.

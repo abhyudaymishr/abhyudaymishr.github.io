@@ -7,7 +7,7 @@ card_summary: "Geometry-induced sparse attention for learning the evolution of p
 featured: true
 title: "GOLA: Geometric Neural Operator with Sparse Local Attention"
 summary: "A formal operator-learning scaffold for one-step PDE time-advance operators using geometry-induced sparse attention and physics-aware losses."
-status: "Active research"
+status: "Completed"
 timeline: "2026"
 image: "/images/gola-attention.png"
 image_alt: "Sparse geometric attention visualization from the GOLA project"
@@ -60,7 +60,7 @@ I also spent time on visualization because sparse geometric attention is easier 
 
 One thing I do not want to overclaim is that GOLA is already the final answer. It is not. There are open questions I still care about. How robust are the neighborhoods when the mesh becomes irregular in more extreme ways? How should local attention behave across obstacles, boundaries, or domains with more complicated topology? Can the learned local quadrature view be made more explicit theoretically, rather than only implicitly suggested by the implementation? And perhaps most importantly, what evaluation protocol best reveals whether the model has actually learned a useful operator rather than a shallow surrogate that looks good on a limited split?
 
-Those questions are part of why this project remains active research for me rather than a completed artifact. GOLA is not just a codebase I want to showcase. It is a place where several of my research instincts meet: geometry-aware learning, scientific machine learning, structured sparsity, and the demand that architecture reflect the mathematical character of the system rather than merely fit the data.
+Those questions suggest possible follow-up work beyond the completed GOLA project. The project brought together geometry-aware learning, scientific machine learning, structured sparsity, and the demand that architecture reflect the mathematical character of the system rather than merely fit the data.
 
 There is also a philosophical reason I keep returning to it. If I borrow a Newtonian sensibility, what matters in a scientific model is not that it reproduces outcomes case by case, but that it expresses a lawlike form through which the outcomes become intelligible. Newton did not make mechanics powerful by listing positions of bodies. He proposed a structured relation between force, motion, and time. In a much humbler and modern computational setting, I think operator learning should aspire to something similar. Not a table of successful predictions, but an architecture whose form says why those predictions should generalize.
 
