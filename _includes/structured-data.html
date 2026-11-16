@@ -4,7 +4,7 @@
 {% assign webpage_id = canonical_url | append: '#webpage' %}
 {% assign entity_id = canonical_url | append: '#work' %}
 {% assign page_type = 'WebPage' %}
-{% if page.layout == 'home' %}{% assign page_type = 'ProfilePage' %}{% elsif page.collection_page %}{% assign page_type = 'CollectionPage' %}{% endif %}
+{% if page.layout == 'home' or page.profile_page %}{% assign page_type = 'ProfilePage' %}{% elsif page.collection_page %}{% assign page_type = 'CollectionPage' %}{% endif %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -12,6 +12,9 @@
     {
       "@type": "Person", "@id": {{ person_id | jsonify }},
       "name": {{ site.author.name | jsonify }}, "url": {{ home_url | jsonify }},
+      "givenName": {{ site.author.given_name | jsonify }}, "familyName": {{ site.author.family_name | jsonify }},
+      "alternateName": {{ site.author.github | jsonify }},
+      "jobTitle": {{ site.author.job_title | jsonify }},
       "description": {{ site.author.summary | jsonify }},
       "affiliation": { "@type": "CollegeOrUniversity", "name": {{ site.author.affiliation | jsonify }} },
       "sameAs": [{{ site.author.github | prepend: 'https://github.com/' | jsonify }}, {{ site.author.linkedin | jsonify }}],
@@ -30,7 +33,8 @@
       "isPartOf": { "@id": {{ website_id | jsonify }} },
       "primaryImageOfPage": { "@type": "ImageObject", "url": {{ meta_image | jsonify }} },
       "about": { "@id": {{ person_id | jsonify }} }
-      {% if page.layout == 'home' %}, "mainEntity": { "@id": {{ person_id | jsonify }} }
+      {% if page.last_modified_at %}, "dateModified": {{ page.last_modified_at | date_to_xmlschema | jsonify }}{% endif %}
+      {% if page.layout == 'home' or page.profile_page %}, "mainEntity": { "@id": {{ person_id | jsonify }} }
       {% elsif page.layout == 'post' or page.layout == 'publication' or page.layout == 'project' %}, "mainEntity": { "@id": {{ entity_id | jsonify }} }{% endif %}
       {% if page.url != '/' %}, "breadcrumb": { "@id": {{ canonical_url | append: '#breadcrumbs' | jsonify }} }{% endif %}
     }

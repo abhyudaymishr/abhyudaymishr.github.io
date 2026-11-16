@@ -5,15 +5,16 @@ seo_title: "Abhyuday Mishra | ML & Research Engineering Resume"
 math: true
 title: "Abhyuday Mishra — Resume"
 permalink: /cv/
+profile_page: true
 body_class: cv-page
 kicker: Resume
-intro: "Machine learning and research engineering resume."
+intro: "Machine learning engineering and quantum computing research, with experience at IIT Madras and integrated B.Tech–M.Tech CSE studies at NFSU Gandhinagar."
 ---
 <p class="cv-contact"><strong>Gandhinagar, Gujarat, India</strong> | <a href="mailto:abhymishrgkp@gmail.com">abhymishrgkp@gmail.com</a> | <a href="https://github.com/abhyudaymishr">github.com/abhyudaymishr</a> | <a href="https://www.linkedin.com/in/abhyuday-mishr-97a9002a5/">LinkedIn</a></p>
 
-## Professional Summary
+## Machine Learning and Quantum Computing Profile
 
-Machine learning and research engineering candidate pursuing an integrated B.Tech-M.Tech in Computer Science and Engineering. Built an end-to-end spatiotemporal hotspot forecasting engine and MCP server across 240k+ records, developed a 2.1M-parameter language model that beat an n-gram baseline by 41%, and contributed to a qudit simulator accepted at SCI 2025. Seeking ML and research internships focused on model development, evaluation, and scientific computing.
+**Abhyuday Mishra** is a machine learning and research engineering candidate pursuing an integrated B.Tech-M.Tech in Computer Science and Engineering at NFSU Gandhinagar. Built an end-to-end spatiotemporal hotspot forecasting engine and MCP server across 240k+ records, developed a 2.1M-parameter language model that beat an n-gram baseline by 41%, and contributed to a qudit simulator accepted at SCI 2025. Seeking ML and research internships focused on model development, evaluation, and scientific computing.
 
 ## Education
 
@@ -72,7 +73,7 @@ Chennai, India | May 2025 to July 2025
 
 ## Selected Credentials
 
-- Abhyuday Mishra, Manav Seksaria, Anil Prabhakar, et al., *Qudit: High-Performance Simulator for Qudit Systems*, accepted at the Supercomputing India Conference (SCI 2025), Bengaluru, India, Paper ID: `scindia2025_pap367`
+- Manav Seksaria, Abhyuday Mishra, and Anil Prabhakar, [*qudit: High-Performance Simulator for Qudit Systems*]({{ '/publications/2025-01-01-qudit-high-performance-simulator/' | relative_url }}), accepted at the Supercomputing India Conference (SCI 2025), Bengaluru, India, Paper ID: `scindia2025_pap367`
 - Quantum Technologies and Applications FDP 2025, AICTE and MNIT Jaipur, completed QT-01, QT-02, QT-03, QT-05, and QT-06
 - Deep Learning, IIT Ropar (NPTEL), Elite Certified, November 2025
 - Large Language Models (NPTEL), Certified, November 2025

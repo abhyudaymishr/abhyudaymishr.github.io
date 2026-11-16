@@ -62,3 +62,20 @@ The updated source remains local until committed and deployed through the existi
 - [Google SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
 - [Title links in Google Search](https://developers.google.com/search/docs/appearance/title-link)
 - [AI features and your website](https://developers.google.com/search/docs/appearance/ai-features)
+
+## Follow-up: name and professional discovery
+
+The homepage now leads with **Abhyuday Mishra**, supported by visible machine learning engineering and quantum computing work. The profile identifies the documented IIT Madras summer research internship and current NFSU studies. Structured data records the actual given name, family name, public GitHub handle, student role, affiliation, and existing professional profile URLs. The resume is also marked as a profile page. This clarifies identity; it does not reserve a search position.
+
+| Search intent | Primary destination | What supports relevance |
+| --- | --- | --- |
+| Abhyuday Mishra | Homepage | Full name in the title and H1, consistent Person identity, institution and experience |
+| Abhyuday Mishra machine learning | Homepage and resume | Visible ML engineering work, project evidence, education and experience |
+| Abhyuday Mishra quantum computing | Research and qudit project | Simulation work, collaborative authorship, and conference entry |
+| GOLA neural operator / Oculon hotspot forecasting | Respective project pages | Distinct technical descriptions and related research notes |
+| Abhyuday / Mishra | Homepage, when relevant to the searcher | These names identify many people; the result order cannot be controlled |
+| Machine learning professionals / quantum professional | Profile and research pages, when relevant | Broad competitive queries may seek directories, consultants, employers, or educational material |
+
+After deployment, use Search Console’s Performance report to measure each query’s impressions, clicks, and average position, with country and device filters. Inspect the exact homepage URL if it is not appearing. Confirm that the real GitHub and LinkedIn profiles link back to this portfolio; those external profile changes have not been performed here. Independent references to the actual work are useful evidence of identity and relevance; extra keyword fields cannot replace them.
+
+Google determines indexing, recommendations, and result order. No implementation can guarantee that a particular site will always rank first, including for a full name, and these changes do not make that claim.

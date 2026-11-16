@@ -11,7 +11,7 @@ intro: "Best ways to reach me for research discussions, collaborations, and proj
 
 - Email: [abhymishrgkp@gmail.com](mailto:abhymishrgkp@gmail.com)
 - GitHub: [github.com/abhyudaymishr](https://github.com/abhyudaymishr)
-- LinkedIn: [Abhyuday Mishr](https://www.linkedin.com/in/abhyuday-mishr-97a9002a5/)
+- LinkedIn: [Abhyuday Mishra](https://www.linkedin.com/in/abhyuday-mishr-97a9002a5/)
 
 ## Good Topics To Reach Out About
 

@@ -60,6 +60,10 @@ def audit(root):
         if not 70<=len(page.description)<=180: warnings.append(f'{url}: description is outside the editorial 70–180-character range')
         if url!=origin+'/' and not inbound[url]: errors.append(f'{url}: no incoming link from another indexable page’s main content')
         graph=[entity for schema in page.schemas for entity in schema.get('@graph',[])]
+        if url==origin+'/':
+            person=next((e for e in graph if e.get('@type')=='Person'),{})
+            if not person.get('name') or person['name'] not in page.h1: errors.append(f'{url}: homepage heading must identify the profile owner')
+            if not person.get('givenName') or not person.get('familyName'): errors.append(f'{url}: structured profile name is incomplete')
         work=next((e for e in graph if e.get('@type') in ('BlogPosting','ScholarlyArticle','CreativeWork')),None)
         if work and work.get('headline')!=page.h1: errors.append(f'{url}: work headline differs from the visible H1')
         if work and not work.get('author'): errors.append(f'{url}: work author missing')

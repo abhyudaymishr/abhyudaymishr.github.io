@@ -9,6 +9,9 @@ repo_branch: "main"
 locale: "en_US"
 default_image: "/assets/images/seo-card.png"
 keywords:
+  - Machine Learning
+  - Machine Learning Engineering
+  - Quantum Simulation
   - Quantum Computing
   - Scientific Machine Learning
   - Neural Operators
@@ -25,9 +28,12 @@ permalink: /blog/:year/:month/:day/:title/
 
 author:
   name: "Abhyuday Mishra"
-  affiliation: "NFSU Gandhinagar"
+  given_name: "Abhyuday"
+  family_name: "Mishra"
+  job_title: "Computer Science and Engineering Student"
+  affiliation: "National Forensic Sciences University, Gandhinagar"
   role: "Quantum Computing | Scientific Machine Learning"
-  summary: "Researching neural operators, sparse geometric learning, qudit circuit design, and knot-type recognition at the intersection of scientific machine learning and topology."
+  summary: "Abhyuday Mishra is a Computer Science and Engineering student at NFSU Gandhinagar with research experience at IIT Madras, working on machine learning systems, quantum simulation, and scientific computing."
   github: "abhyudaymishr"
   linkedin: "https://www.linkedin.com/in/abhyuday-mishr-97a9002a5/"
 
