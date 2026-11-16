@@ -1,5 +1,8 @@
 ---
-title: Projects
+last_modified_at: "2026-11-16"
+description: "Explore GOLA neural operators, Oculon hotspot forecasting, qudit simulation, knot recognition, and NanoTransformer projects by Abhyuday Mishra."
+seo_title: "ML & Quantum Computing Projects | Abhyuday Mishra"
+title: "Research & engineering projects"
 permalink: /projects/
 kicker: Research & engineering
 intro: "From mathematical ideas to working systems. Explore experiments in scientific machine learning, quantum computing, topology, and language modeling."

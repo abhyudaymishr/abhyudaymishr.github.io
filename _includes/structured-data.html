@@ -38,7 +38,7 @@
     {
       "@type": {% if page.layout == 'post' %}"BlogPosting"{% elsif page.layout == 'publication' %}"ScholarlyArticle"{% else %}"CreativeWork"{% endif %},
       "@id": {{ entity_id | jsonify }}, "url": {{ canonical_url | jsonify }},
-      "name": {{ meta_title | jsonify }}, "headline": {{ meta_title | jsonify }},
+      "name": {{ page.title | jsonify }}, "headline": {{ page.title | jsonify }},
       "description": {{ meta_description | jsonify }}, "image": {{ meta_image | jsonify }},
       "mainEntityOfPage": { "@id": {{ webpage_id | jsonify }} },
       "author": {% if page.author_list %}[{% for author in page.author_list %}{ "@type": "Person", "name": {{ author | jsonify }} }{% unless forloop.last %},{% endunless %}{% endfor %}]{% else %}{ "@id": {{ person_id | jsonify }} }{% endif %},

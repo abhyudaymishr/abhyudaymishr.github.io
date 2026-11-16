@@ -1,4 +1,7 @@
 ---
+last_modified_at: "2026-11-16"
+description: "Conference paper on high-performance qudit simulation by Manav Seksaria, Abhyuday Mishra, and Anil Prabhakar at Supercomputing India 2025."
+seo_title: "qudit: High-Performance Qudit Simulator | Abhyuday Mishra"
 author_list:
   - Manav Seksaria
   - Abhyuday Mishra
@@ -30,4 +33,6 @@ Conference details:
 - Venue: **2025 Supercomputing India (SCI)**
 - eCF Paper Id: `scindia2025__pap367`
 
-The site intentionally does **not** display personal author email addresses on this publication page.
+## Related implementation
+
+The [qudit quantum circuit framework]({{ '/projects/qudit-circuit-framework/' | relative_url }}) describes the collaborative simulator work, including generalized circuits, quantum-system metrics, and benchmarking.

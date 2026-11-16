@@ -1,0 +1,4 @@
+{% if page.project_ref %}
+  {% assign related_project = site.projects | where: 'url', page.project_ref | first %}
+  {% if related_project %}<section class="related-project" aria-labelledby="related-project-title"><p class="eyebrow">Project behind this note</p><h2 id="related-project-title"><a href="{{ related_project.url | relative_url }}">{{ related_project.title }}</a></h2><p>{{ related_project.card_summary | default: related_project.summary }}</p></section>{% endif %}
+{% endif %}

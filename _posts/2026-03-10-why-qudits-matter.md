@@ -1,4 +1,9 @@
 ---
+last_modified_at: "2026-11-16"
+category: "Quantum computing"
+project_ref: "/projects/qudit-circuit-framework/"
+description: "Why d-level quantum systems need dimension-aware gates, circuit abstractions, generalized QFT routines, and careful simulator benchmarks."
+seo_title: "Why Qudits Matter for Quantum Simulation | Abhyuday Mishra"
 math: true
 title: "Why Qudits Are Worth Building Tools For"
 date: 2026-03-10

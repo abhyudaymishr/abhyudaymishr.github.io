@@ -1,6 +1,6 @@
 title: "Abhyuday Mishra"
 email: "abhymishrgkp@gmail.com"
-description: "Quantum Computing, Neural Operators, Scientific Machine Learning, Qudits, and Knot-Type Recognition."
+description: "Abhyuday Mishra’s research portfolio: scientific machine learning, neural operators, quantum computing, qudit simulation, and knot recognition."
 url: "https://abhyudaymishr.github.io"
 baseurl: ""
 timezone: "Asia/Kolkata"
@@ -73,3 +73,9 @@ exclude:
   - vendor
   - .bundle
   - .github
+  - docs
+  - seo-audit.json
+
+# Add only the verification value issued by the respective property owner console.
+# google_site_verification: ""
+# bing_site_verification: ""

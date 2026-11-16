@@ -1,4 +1,9 @@
 ---
+last_modified_at: "2026-11-16"
+category: "Language models"
+project_ref: "/projects/nanotransformer/"
+description: "Lessons from building a small causal language model: BPE tokenization, reproducible training, a trigram baseline, checkpoint evaluation, and latency."
+seo_title: "Building a Small Language Model by Hand | Abhyuday Mishra"
 title: "Why Build a Small Language Model by Hand"
 date: 2026-03-18
 ---

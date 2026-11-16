@@ -1,4 +1,9 @@
 ---
+last_modified_at: "2026-11-16"
+category: "Topology"
+project_ref: "/projects/knot-recognition/"
+description: "A research perspective on knot recognition using neural networks, graph representations, Gauss and PD codes, and classical topological invariants."
+seo_title: "Knot Invariants & Neural Networks | Abhyuday Mishra"
 math: true
 title: "Learning Knot Invariants with Neural Networks"
 date: 2026-02-01

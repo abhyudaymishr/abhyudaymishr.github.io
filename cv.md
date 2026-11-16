@@ -1,6 +1,9 @@
 ---
+last_modified_at: "2026-11-16"
+description: "Abhyuday Mishra’s education, IIT Madras research internship, machine learning projects, quantum computing work, and research engineering skills."
+seo_title: "Abhyuday Mishra | ML & Research Engineering Resume"
 math: true
-title: Abhyuday Mishra
+title: "Abhyuday Mishra — Resume"
 permalink: /cv/
 body_class: cv-page
 kicker: Resume

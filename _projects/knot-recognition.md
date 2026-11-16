@@ -1,10 +1,13 @@
 ---
+last_modified_at: "2026-11-16"
+description: "Explore an early knot recognition pipeline using image classification, graph representations, heuristic Gauss and PD codes, and topological structure."
+seo_title: "Knot Recognition with Neural Networks | Abhyuday Mishra"
 short_title: "Knot-type recognition"
 category: "Topology"
 cover: "/assets/images/topology.svg"
 card_summary: "Connecting images, graph representations, and the mathematical structure of knots."
 featured: false
-title: "Knot-Type Recognition"
+title: "Knot-Type Recognition with Neural Networks"
 permalink: /projects/knot-recognition/
 summary: "A scientific knot-analysis pipeline that combines image classification, heuristic Gauss/PD extraction, and protein-knot experiments."
 status: "Early research"

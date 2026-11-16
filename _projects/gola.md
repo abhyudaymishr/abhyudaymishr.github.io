@@ -1,4 +1,7 @@
 ---
+last_modified_at: "2026-11-16"
+description: "GOLA is a completed neural operator project for PDE time advancement using geometry-induced sparse attention, local graphs, and physics-aware losses."
+seo_title: "GOLA: Geometric Neural Operator | Abhyuday Mishra"
 math: true
 short_title: "GOLA"
 category: "Scientific ML"
@@ -32,6 +35,8 @@ using geometry-induced sparse attention rather than dense global token mixing. B
   <figcaption>The actual GOLA repository includes dataset-backed and synthetic visualizations showing why sparse geometric attention is a natural fit for local operator structure.</figcaption>
 </figure>
 
+## Data contracts and geometric tokens
+
 The actual repository is grounded in a fairly concrete setup. The current implementation centers on one-step Navier-Stokes operator learning. The dataset class expects data shaped like `[num_trajectories, time_steps, H, W, channels]`, with the usual incompressible-flow interpretation where the channels can correspond to velocity components and pressure. Each sample returns `u_t`, `u_t_next`, `x`, and `node_weight`. That choice matters. I did not want to treat the dataset as an arbitrary tensor pipeline where coordinates are an afterthought. Returning coordinates and quadrature weights explicitly forces the operator perspective. The sample is not just “an image at one time and another image later.” It is a discretized field on a geometric domain, and the model is supposed to learn the map between fields.
 
 Once I committed to that perspective, tokenization also became straightforward. The token is not a word-like unit and not a patch in the vision-transformer sense. The token is a geometric state attached to a location:
@@ -41,6 +46,8 @@ $$
 $$
 
 That is one of the cleanest ideas in the whole project. No positional encoding is necessary, because the position is already part of the token. No causal mask is necessary, because this is not language generation. No padding logic is fundamental to the formulation. The model is being asked to learn an operator over geometric states, so the representation should admit that openly. I like this because it removes a lot of decorative machinery that would otherwise make the code look modern while actually obscuring what problem is being solved.
+
+## Sparse local attention
 
 From there, the next step is the graph. GOLA builds a static geometry graph using either `radius_graph(x, r)` or `knn_graph(x, k)`. I prefer thinking about this as a declaration of admissible interaction rather than just a data structure. A point can attend only to points that are meaningfully near it according to the geometry I decided to trust. The graph stores relative positions and pairwise distances, so attention is conditioned not only on features but on the spatial relation itself. This is where the model stops behaving like a generic sparse transformer and starts behaving like a physically motivated operator learner.
 
@@ -52,11 +59,17 @@ $$
 
 I find it helpful to read this as a learned local quadrature rule. The model is not simply “passing messages.” It is approximating a nonlinear integral operator over a restricted neighborhood that comes from geometry. The attention weights are learned, yes, but they are learned inside a structure that already says something about the operator class I believe I am dealing with. That distinction matters to me. A lot of machine-learning language tends to collapse every architecture into some version of feature mixing. Here I want the mathematics to remain visible.
 
+## Physics-aware losses
+
 Training follows the same logic. The code does include the ordinary field loss, but I did not want to stop there because PDE learning becomes misleading if one only reports a single MSE number. So the project also exposes physics-aware penalties such as `divergence_penalty_2d`, `kinetic_energy_consistency_loss`, and `enstrophy_error_2d`. I do not claim that these solve everything. They do not. But they force the training loop to acknowledge that physical structure is part of the target, not an optional decoration to mention in the abstract and ignore in the implementation.
+
+## Memory-aware implementation
 
 Another part of GOLA that I care about a lot is the mundane engineering. The repository supports local `.npy` and `.npz` datasets, direct Hugging Face dataset loading, bounded-neighbor graph construction, memory-aware execution, and a low-memory profile aimed at machines with limited RAM. This may sound secondary next to the model idea, but for research code it really is not. A beautiful method that only works on an idealized hardware setup is not a serious scaffold. I wanted the project to be usable under constraints, because that is the environment in which most actual research iteration happens.
 
 I also spent time on visualization because sparse geometric attention is easier to understand when you can actually see the neighborhood structure. The repository includes scripts that produce both static and interactive visualizations, and I think that is important for two reasons. First, it makes debugging easier. Second, it gives the project a kind of scientific legibility. When I look at a visualization of the sparse neighborhood pattern on a domain with geometry, I can ask whether the pattern even makes sense before I ask whether the validation number improved.
+
+## Scope and follow-up questions
 
 One thing I do not want to overclaim is that GOLA is already the final answer. It is not. There are open questions I still care about. How robust are the neighborhoods when the mesh becomes irregular in more extreme ways? How should local attention behave across obstacles, boundaries, or domains with more complicated topology? Can the learned local quadrature view be made more explicit theoretically, rather than only implicitly suggested by the implementation? And perhaps most importantly, what evaluation protocol best reveals whether the model has actually learned a useful operator rather than a shallow surrogate that looks good on a limited split?
 

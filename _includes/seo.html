@@ -1,10 +1,10 @@
-{% assign meta_title = page.title | default: site.title %}
+{% assign meta_title = page.seo_title | default: page.title | default: site.title %}
 {% assign meta_description = page.description | default: page.intro | default: page.summary | default: page.abstract | default: page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 300 %}
 {% assign canonical_url = page.url | replace: 'index.html', '' | absolute_url %}
 {% assign meta_image = page.social_image | default: site.default_image | absolute_url %}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ meta_title | escape }}{% unless meta_title == site.title %} | {{ site.title | escape }}{% endunless %}</title>
+<title>{{ meta_title | escape }}{% unless page.seo_title or meta_title == site.title %} | {{ site.title | escape }}{% endunless %}</title>
 <meta name="description" content="{{ meta_description | escape }}">
 <meta name="author" content="{{ site.author.name | escape }}">
 <meta name="robots" content="{% if page.noindex %}noindex,follow{% else %}index,follow,max-image-preview:large,max-snippet:-1{% endif %}">
@@ -33,4 +33,6 @@
 {% for author in page.author_list %}<meta name="citation_author" content="{{ author | escape }}">{% endfor %}
 {% if page.type == 'Conference paper' %}<meta name="citation_conference_title" content="{{ page.venue | escape }}">{% endif %}
 {% endif %}
+{% if site.google_site_verification %}<meta name="google-site-verification" content="{{ site.google_site_verification | escape }}">{% endif %}
+{% if site.bing_site_verification %}<meta name="msvalidate.01" content="{{ site.bing_site_verification | escape }}">{% endif %}
 {% include structured-data.html %}

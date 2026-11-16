@@ -1,5 +1,8 @@
 ---
-title: Contact
+last_modified_at: "2026-11-16"
+description: "Contact Abhyuday Mishra about scientific machine learning, quantum computing, knot recognition, open-source research software, and collaboration."
+seo_title: "Contact Abhyuday Mishra | Research & Collaboration"
+title: "Contact Abhyuday Mishra"
 permalink: /contact/
 kicker: Contact
 intro: "Best ways to reach me for research discussions, collaborations, and project-related questions."

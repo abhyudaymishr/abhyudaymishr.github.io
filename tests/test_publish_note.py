@@ -1,14 +1,48 @@
 import unittest
 import sys
 from pathlib import Path
+import contextlib
+import io
+import tempfile
+from unittest.mock import patch
 
 # Add repo root to sys.path so scripts can be imported
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from scripts.publish_note import slugify, extract_title_and_body, HTMLToMarkdown, find_matching_post
+from scripts import publish_note
 
 class TestPublishNote(unittest.TestCase):
+    def test_notes_update_preserves_authored_metadata_and_published_url(self):
+        with tempfile.TemporaryDirectory() as directory:
+            posts = Path(directory)
+            post = posts / '2026-03-10-original-title.md'
+            retained = '''seo_title: "Quantum Computing Research | Abhyuday Mishra"
+description: >-
+  A carefully written summary of the research.
+  This continuation belongs to the description.
+topics:
+  - Quantum Computing
+  - Scientific ML
+math: true
+project_ref: /projects/qudit-circuit-framework/
+permalink: /blog/stable-address/
+'''
+            post.write_text('---\ntitle: "Original title"\ndate: 2026-03-10\nlast_modified_at: 2026-03-11\nnote_id: "note-123"\n'+retained+'---\nOld body.\n')
+            with patch.object(publish_note, 'POSTS_DIR', posts), contextlib.redirect_stdout(io.StringIO()):
+                filename = publish_note.publish_post_content('# Updated title\n\nNew body.\n#Update', note_id='note-123', push=False)
+            updated = post.read_text()
+            self.assertEqual(filename, post.name)
+            self.assertIn(retained, updated)
+            self.assertIn('title: "Updated title"', updated)
+            self.assertIn('date: 2026-03-10', updated)
+            self.assertEqual(updated.count('last_modified_at:'), 1)
+            self.assertNotIn('last_modified_at: 2026-03-11', updated)
+            self.assertIn('New body.', updated)
+            self.assertNotIn('Old body.', updated)
+            self.assertEqual(len(list(posts.glob('*.md'))), 1)
+
     def test_slugify(self):
         self.assertEqual(slugify("Why Qudits Matter!"), "why-qudits-matter")
         self.assertEqual(slugify("  Neural   Operators & Geometry  "), "neural-operators-geometry")

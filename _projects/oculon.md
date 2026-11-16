@@ -1,4 +1,7 @@
 ---
+last_modified_at: "2026-11-16"
+description: "Oculon combines Delhi hotspot forecasting, forward-time evaluation, spatial transport metrics, and Model Context Protocol tools for AI agents."
+seo_title: "Oculon: Hotspot Forecasting & MCP | Abhyuday Mishra"
 math: true
 short_title: "Oculon"
 category: "Scientific ML"

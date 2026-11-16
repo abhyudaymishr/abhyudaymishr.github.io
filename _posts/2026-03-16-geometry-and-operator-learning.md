@@ -1,4 +1,9 @@
 ---
+last_modified_at: "2026-11-16"
+category: "Neural operators"
+project_ref: "/projects/gola/"
+description: "How locality, geometric tokens, and sparse neighborhoods shape neural operators for PDEs, with examples from the completed GOLA project."
+seo_title: "Geometry-Aware Neural Operator Learning | Abhyuday Mishra"
 math: true
 title: "Why Geometry Matters in Operator Learning"
 date: 2026-03-16

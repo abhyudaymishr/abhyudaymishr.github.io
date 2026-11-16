@@ -58,6 +58,17 @@ jobs:
       - name: Verify generated pages and discovery resources
         run: python3 scripts/verify_site.py _site
 
+      - name: Audit titles, descriptions, contextual links, and article metadata
+        run: python3 scripts/verify_seo.py _site --report seo-audit.json
+
+      - name: Save on-page SEO audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-audit
+          path: seo-audit.json
+          if-no-files-found: ignore
+
       - name: Upload artifact
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3

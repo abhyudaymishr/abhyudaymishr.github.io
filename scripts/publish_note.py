@@ -25,6 +25,7 @@ import re
 import argparse
 import subprocess
 import datetime
+import json
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -331,6 +332,25 @@ def notify_mac(title: str, message: str):
     subprocess.run(['osascript', '-e', ascript], capture_output=True, text=True)
 
 
+def preserved_post_metadata(source: str) -> str:
+    """Keep authored YAML blocks when Notes updates publisher-owned fields.
+
+    Preserve the original YAML instead of parsing/re-serializing it, so lists,
+    block descriptions, custom permalinks, and comments retain their meaning.
+    """
+    match = re.match(r'^---\s*\n(.*?)\n---(?:\n|$)', source, re.DOTALL)
+    if not match:
+        return ''
+    managed = {'title', 'date', 'last_modified_at', 'note_id'}
+    blocks = re.split(r'(?m)(?=^[A-Za-z_][A-Za-z0-9_-]*\s*:)', match.group(1))
+    preserved = []
+    for block in blocks:
+        key = re.match(r'^([A-Za-z_][A-Za-z0-9_-]*)\s*:', block)
+        if not key or key.group(1) not in managed:
+            preserved.append(block.rstrip('\n'))
+    return '\n'.join(part for part in preserved if part)
+
+
 def publish_post_content(raw_text: str, note_id: str = None, custom_date: str = None, dry_run: bool = False, push: bool = True):
     """
     Parses note content, creates or updates markdown file in _posts, commits, and pushes.
@@ -369,18 +389,20 @@ def publish_post_content(raw_text: str, note_id: str = None, custom_date: str = 
     if is_update:
         print(f"   Last Modified: {today_str}")
 
-    escaped_title = title.replace('"', '\\"')
-
     # Build Front Matter
     front_matter_lines = [
         "---",
-        f'title: "{escaped_title}"',
+        f'title: {json.dumps(title, ensure_ascii=False)}',
         f'date: {post_date}',
     ]
     if is_update:
         front_matter_lines.append(f'last_modified_at: {today_str}')
     if bound_note_id:
-        front_matter_lines.append(f'note_id: "{bound_note_id}"')
+        front_matter_lines.append(f'note_id: {json.dumps(bound_note_id, ensure_ascii=False)}')
+    if is_update:
+        retained = preserved_post_metadata(file_path.read_text(encoding='utf-8'))
+        if retained:
+            front_matter_lines.append(retained)
     front_matter_lines.append("---")
     front_matter_lines.append(body + "\n")
 

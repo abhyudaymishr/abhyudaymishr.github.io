@@ -1,4 +1,9 @@
 ---
+last_modified_at: "2026-11-16"
+category: "Scientific machine learning"
+project_ref: "/projects/navier-stokes-operators/"
+description: "Why Navier–Stokes operator learning needs fair baselines, rollout evaluation, consistent data contracts, and tests for physical structure."
+seo_title: "Evaluating Neural Operators for Fluid Flow | Abhyuday Mishra"
 title: "Structure Before Scale in Fluid Operator Learning"
 date: 2026-03-18
 ---

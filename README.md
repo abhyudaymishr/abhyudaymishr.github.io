@@ -29,6 +29,10 @@ Project `featured`, `order`, `cover`, `short_title`, `card_summary`, and `catego
 
 ## Search and AI discovery
 
+See [the live-site findings and on-page audit](docs/seo-audit.md) for measured results, scope limits, and the owner-only Search Console checks.
+
+Each content file accepts a full `seo_title` and an explicit `description`, separate from its visible `title`. Research notes use `project_ref` for their related-project link. Notes updates preserve these authored fields, `math`, topic lists, and custom permalinks. Review the description when changing a note’s subject.
+
 - Every important page is pre-rendered HTML with a stable canonical URL, descriptive metadata, semantic landmarks, and crawlable links.
 - JSON-LD connects the researcher, website, pages, breadcrumbs, and creative works. Conference papers and drafts preserve their actual status and authorship. Do not add unverified metrics, publication dates, or affiliations.
 - `sitemap.xml`, `feed.xml`, `content-index.json`, `llms.txt`, and `llms-full.txt` are generated from the same Jekyll collections as the visible pages. No manual content-index synchronization is needed.
@@ -45,6 +49,7 @@ Submit `https://abhyudaymishr.github.io/sitemap.xml` in the owner’s Google Sea
 node --test tests/*.test.mjs
 bundle exec jekyll build
 python3 scripts/verify_site.py _site
+python3 scripts/verify_seo.py _site --report /tmp/seo-audit.json
 ```
 
 CI runs the same checks before uploading the GitHub Pages artifact. Pull requests validate without deploying; pushes to `main` publish through the existing Pages deployment. The output audit checks canonical URLs, titles/descriptions, one main heading and landmark per page, image dimensions, local links and anchors, JSON-LD parsing, sitemap/index coverage, feed XML, and social-card dimensions. It is not a substitute for browser accessibility, mobile-layout, or real-world performance testing.

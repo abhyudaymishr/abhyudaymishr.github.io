@@ -94,7 +94,7 @@ for item in index['items']:
 for name in ('llms.txt','llms-full.txt','robots.txt'):
     text=(root/name).read_text();require('{{' not in text and '{%' not in text,f'Unrendered Liquid in {name}')
 require('/sitemap.xml' in (root/'robots.txt').read_text(),'robots.txt lacks sitemap')
-require(not (root/'scripts').exists() and not (root/'tests').exists() and not (root/'README.html').exists(),'Development files exposed in build')
+require(not (root/'scripts').exists() and not (root/'tests').exists() and not (root/'docs').exists() and not (root/'README.html').exists(),'Development files exposed in build')
 png=(root/'assets/images/seo-card.png').read_bytes()
 require(png[:8]==b'\x89PNG\r\n\x1a\n' and struct.unpack('>II',png[16:24])==(1200,630),'Social card must be a 1200 × 630 PNG')
 require((root/'assets/images/structure.svg').stat().st_size < 250_000, 'Hero asset exceeded size budget')

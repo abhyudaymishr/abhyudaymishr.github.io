@@ -7,8 +7,8 @@ layout: default
   <div class="shell hero__inner">
     <div class="hero__copy">
       <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span>{{ home.eyebrow }}</p>
-      <h1 id="hero-title">{{ home.heading }}</h1>
-      <p class="hero__lede">{{ home.intro }}</p>
+      <h1 id="hero-title">{{ home.heading | escape }}</h1>
+      <p class="hero__lede">{{ home.intro | escape }}</p>
       <div class="hero__actions">
         <a class="button button--light" href="{{ '/research/' | relative_url }}">Explore research {% include icon.html name='arrow' %}</a>
         <a class="button button--ghost" href="{{ '/projects/' | relative_url }}">View projects</a>

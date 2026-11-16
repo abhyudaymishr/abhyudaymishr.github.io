@@ -1,4 +1,7 @@
 ---
+last_modified_at: "2026-11-16"
+description: "A collaborative qudit simulation project with dimension-aware gates, generalized quantum circuits, quantum-system metrics, and benchmarking."
+seo_title: "Qudit Quantum Circuit Simulator | Abhyuday Mishra"
 author_list:
   - Manav Seksaria
   - Abhyuday Mishra
@@ -103,3 +106,7 @@ So if I had to summarize the project in one sentence, I would say this: it is a 
 ## Related Note
 
 For the shorter research essay version, see [Why Qudits Are Worth Building Tools For]({{ '/blog/2026/03/10/why-qudits-matter/' | relative_url }}).
+
+## Conference publication
+
+See [qudit: High-Performance Simulator for Qudit Systems]({{ '/publications/2025-01-01-qudit-high-performance-simulator/' | relative_url }}) for the author list and Supercomputing India 2025 conference details.

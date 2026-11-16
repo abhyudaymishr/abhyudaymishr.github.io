@@ -1,10 +1,13 @@
 ---
+last_modified_at: "2026-11-16"
+description: "NanoTransformer is a compact causal language model project with BPE tokenization, configurable training, a trigram baseline, evaluation, and latency tests."
+seo_title: "NanoTransformer: Small Language Model | Abhyuday Mishra"
 short_title: "NanoTransformer"
 category: "Language models"
 cover: "/assets/images/language.svg"
 card_summary: "A small language model built to make the complete learning system inspectable."
 featured: false
-title: "NanoTransformer"
+title: "NanoTransformer: A Compact Causal Language Model"
 summary: "A compact causal language model project that reflects my broader interest in efficient learning systems and research-grade implementation."
 status: "Built"
 timeline: "2025-2026"
@@ -16,9 +19,13 @@ order: 6
 ---
 NanoTransformer looks like an outlier on this site at first glance, and that is reasonable. Most of my work here sits much closer to scientific machine learning, quantum systems, topology, or structured operators. A small language model project seems like it belongs to a different world. But I keep it here because, in a less obvious way, it is driven by the same research instinct as the rest of the portfolio: I want systems that I can fully inspect. I want experiments whose internal structure I actually understand. And I want the implementation to be honest enough that success or failure teaches me something rather than just producing a nice-looking number.
 
+## A compact causal language model
+
 NanoTransformer is a stage-wise implementation of a tiny causal language model with context length `3` and roughly `2.1M` parameters. The number itself is not the interesting part. What matters is that the project includes the whole experimental path, not merely the final network definition. The repository covers tokenizer training, corpus preparation, split generation, model training, evaluation, a trigram baseline with add-k smoothing, and latency measurement. That completeness is the point. I wanted a small system in which every stage of the pipeline remains visible and revisitable.
 
 This matters because contemporary language-model discourse often collapses too many things into “the model.” In practice, the tokenizer, data pipeline, baseline choice, checkpoint evaluation logic, and inference latency can matter as much as the block diagram. A small project is a good place to remember that. When the system is compact, weak assumptions are harder to hide. If the tokenizer is poor, you feel it. If the baseline is too weak, it shows. If latency is ignored, deployment realism disappears. I like NanoTransformer because it puts those concerns back in the foreground.
+
+## Training, evaluation, and baselines
 
 The repository’s CLI reflects that full-stack perspective. There are separate entry points for training, evaluation, baseline comparison, and latency measurement:
 
@@ -30,6 +37,8 @@ nanotransformer-latency --config /path/to/config.json --checkpoint /path/to/chec
 ```
 
 I like this decomposition because it makes the experiment legible. The tokenizer can be trained from a raw UTF-8 corpus. Token IDs and splits can be built as explicit artifacts. The training loop can be run with a configuration file instead of hidden notebook state. The trigram baseline can be called on equal footing instead of mentioned abstractly and then ignored. Latency can be measured as part of the project rather than treated as a separate production concern that never arrives. None of this is flashy, but it makes the repository much more useful to me as a real research artifact.
+
+## Why use a small language model
 
 The small size is a feature, not a limitation I reluctantly tolerate. Large models can hide a surprising amount of sloppiness behind scale. They can absorb imperfect tokenization, fuzzy evaluation, weak baselines, and vague engineering boundaries simply because the model is big enough to dominate the conversation. A compact model does not allow that kind of laziness. If something is wrong, the wrongness tends to become visible. That is very useful when the goal is understanding rather than prestige.
 

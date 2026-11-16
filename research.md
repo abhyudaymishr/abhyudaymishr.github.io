@@ -1,6 +1,9 @@
 ---
+last_modified_at: "2026-11-16"
+description: "Explore Abhyuday Mishra’s completed GOLA neural operator work, collaborative qudit simulation, and research in knot recognition and scientific ML."
+seo_title: "Scientific ML & Quantum Computing Research | Abhyuday Mishra"
 math: true
-title: Research
+title: "Scientific machine learning & quantum computing research"
 permalink: /research/
 kicker: Research
 intro: "Research centered on geometry-aware operator learning, with collaborative work in qudit simulation and topological machine learning."
@@ -9,7 +12,7 @@ intro: "Research centered on geometry-aware operator learning, with collaborativ
 
 ### GOLA and Operator Learning
 
-I completed **GOLA**, a geometric neural operator project for learning one-step PDE time-advance operators with sparse geometry-induced attention. The project explored whether local geometric structure should be encoded directly in the operator architecture instead of being approximated through dense global token mixing.
+I completed [GOLA, a geometric neural operator]({{ '/projects/gola/' | relative_url }}), a project for learning one-step PDE time-advance operators with sparse geometry-induced attention. The project explored whether local geometric structure should be encoded directly in the operator architecture instead of being approximated through dense global token mixing.
 
 The work covered:
 
@@ -18,21 +21,21 @@ The work covered:
 - physics-aware losses such as divergence, energy, and enstrophy penalties
 - memory-bounded training setups that stay realistic on limited hardware
 
-The project focused on making operator-learning systems more faithful to the geometry and numerical structure of the physical problems they model.
+The project focused on making operator-learning systems more faithful to the geometry and numerical structure of the physical problems they model. Related work includes [neural operators for Navier–Stokes systems]({{ '/projects/navier-stokes-operators/' | relative_url }}) and the note on [geometry in operator learning]({{ '/blog/2026/03/16/geometry-and-operator-learning/' | relative_url }}).
 
 ## Collaborative and Adjacent Directions
 
 ### Qudit Simulation and Quantum Computing
 
-I also work on qudit systems and higher-dimensional circuit design. This includes collaborative work on simulation frameworks, generalized QFT-style constructions, and questions about how to represent and optimize quantum circuits when the local Hilbert space is not restricted to qubits.
+My [qudit quantum circuit framework work]({{ '/projects/qudit-circuit-framework/' | relative_url }}) covers higher-dimensional circuit design and collaborative simulation software. This includes collaborative work on simulation frameworks, generalized QFT-style constructions, and questions about how to represent and optimize quantum circuits when the local Hilbert space is not restricted to qubits.
 
 ### Topological Learning and Knot Recognition
 
-Another direction is knot-type recognition as a hybrid ML and topology problem. Here the goal is to combine geometric or diagrammatic representations with explicit topological structure such as Gauss or PD-like codes and classical invariants.
+My [knot-type recognition project]({{ '/projects/knot-recognition/' | relative_url }}) studies a hybrid ML and topology problem. Here the goal is to combine geometric or diagrammatic representations with explicit topological structure such as Gauss or PD-like codes and classical invariants.
 
 ### Research Engineering
 
-I care about research systems as much as model ideas: reproducible training pipelines, interpretable baselines, clean dataset contracts, and tooling that can be extended into future experiments rather than discarded after a single run.
+Projects such as [NanoTransformer]({{ '/projects/nanotransformer/' | relative_url }}) and [Oculon’s spatiotemporal forecasting and MCP tools]({{ '/projects/oculon/' | relative_url }}) reflect my interest in research systems as much as model ideas: reproducible training pipelines, interpretable baselines, clean dataset contracts, and tooling that can be extended into future experiments rather than discarded after a single run.
 
 ## Research Questions
 

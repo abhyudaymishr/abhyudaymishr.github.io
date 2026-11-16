@@ -1547,3 +1547,27 @@ mjx-container[display=true] {
   line-height: 1.7;
   color: var(--muted);
 }
+.related-project {
+  border-top: 1px solid var(--line);
+  margin-top: 42px;
+  padding: 26px 0 0;
+}
+.related-project .eyebrow {
+  margin-bottom: 12px;
+}
+.related-project h2 {
+  font-size: 25px;
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+.related-project h2 a {
+  color: var(--blue);
+}
+.related-project h2 a:hover {
+  text-decoration: underline;
+}
+.related-project p:last-child {
+  color: var(--muted);
+  font-size: 14px;
+  max-width: 700px;
+}

@@ -19,7 +19,7 @@ search: false
       "type": {% if entry.collection == 'projects' %}"Project"{% elsif entry.collection == 'publications' %}"Publication"{% elsif entry.collection == 'posts' %}"Research note"{% else %}"Page"{% endif %},
       "description": {{ entry.description | default: entry.intro | default: entry.summary | default: entry.abstract | default: entry.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 350 | jsonify }},
       "topics": {{ entry.topics | default: entry.keywords | default: site.keywords | jsonify }},
-      "text": {% if entry.collection or entry.url == '/research/' or entry.url == '/cv/' or entry.url == '/contact/' or entry.url == '/' %}{{ entry.content | strip_html | normalize_whitespace | jsonify }}{% else %}{{ entry.intro | default: entry.description | default: site.description | jsonify }}{% endif %}
+      "text": {% if entry.collection %}{{ entry.content | strip_html | normalize_whitespace | jsonify }}{% else %}{{ entry.description | default: entry.intro | default: site.description | jsonify }}{% endif %}
       {% if entry.status or entry.type %}, "status": {{ entry.status | default: entry.type | jsonify }}{% endif %}
     }
   {% endif %}{% endfor %}

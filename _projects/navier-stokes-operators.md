@@ -1,4 +1,7 @@
 ---
+last_modified_at: "2026-11-16"
+description: "Neural operator experiments for incompressible Navier–Stokes flow, focused on locality, reproducible data contracts, baselines, and rollout evaluation."
+seo_title: "Navier–Stokes Neural Operators | Abhyuday Mishra"
 short_title: "Learning fluid dynamics"
 category: "Scientific ML"
 cover: "/assets/images/operators.svg"
@@ -15,11 +18,15 @@ order: 5
 ---
 I keep this project page separate from GOLA because I do not want a single architecture to stand in for the whole research problem. GOLA is one concrete design inside a broader question that has been occupying me for a while: how should operator-learning systems for incompressible fluid dynamics actually be studied if the goal is scientific understanding rather than benchmark theater? That broader question deserves its own page because the model is only one part of the story. Datasets, rollout protocols, ablations, baselines, preprocessing decisions, and memory constraints all shape what kind of conclusion one is allowed to draw.
 
+## Evaluating time-advance operators
+
 For Navier-Stokes style systems, the temptation is always to compress the problem into a clean score and move on. But fluid learning resists that simplification. A model can have excellent one-step accuracy and still drift badly over longer horizons. It can fit local statistics while violating conservation-sensitive structure. It can look good on a benchmark that has quietly encoded shortcuts in the sampling or preprocessing. So when I say this project studies neural operators for Navier-Stokes systems, I mean something more than trying architectures until one of them wins a leaderboard slot. I mean building a research setting in which the failure modes are visible.
 
 That is why the system work matters as much as the model work. I care about benchmark construction, locality-aware architectures, rollout evaluation, geometry-aware preprocessing, and reproducibility in a very practical sense. If two operator models are compared under slightly different data contracts, different rollout lengths, different treatment of boundaries, or different normalization conventions, then the comparison may be rhetorically confident but scientifically weak. This page exists to insist that those surrounding details are not secondary.
 
 In practice, this has meant thinking about how Navier-Stokes data is represented, what exactly the target operator should be, how to evaluate one-step versus multi-step behavior, and what losses actually reflect the things I care about. One-step forecasting is appealing because it simplifies the learning problem, but it also risks creating a false sense of success if the learned map compounds error destructively under rollout. Long-horizon evaluation is harder and often messier, but I trust it more. It asks whether the operator has learned something structurally useful rather than merely something locally predictive.
+
+## Geometry, locality, and reproducibility
 
 Locality is another recurring concern. Fluids are not arbitrary token collections. The geometry and the coupling structure matter, especially when the domain becomes irregular or when conservation-related quantities should not be treated as optional. That is one reason GOLA emerged as a concrete architecture within this larger project. But even beyond GOLA, I want the Navier-Stokes operator program to remain architecture-agnostic enough to compare different biases honestly. If I only build one model and one story around it, then I have not really studied the problem. I have only defended a preference.
 
@@ -30,6 +37,8 @@ There is also an issue of scale and honesty here. Modern ML makes it very easy t
 This is where I find a Galilean lens useful. Galileo did not make motion intelligible simply by collecting more examples of moving things. He insisted on the right mathematical description. In a small and contemporary way, I think learned operators should be judged similarly. Do they speak the mathematical language of flow, or do they merely imitate snapshots well enough to survive a narrow benchmark? I do not ask that question rhetorically. I think it should determine how the experiments are built.
 
 That philosophical stake can be stated more plainly: are we discovering a computational form that respects something real about the physics, or are we just fitting a dataset with elegant vocabulary? I think scientific machine learning becomes interesting precisely when that question is hard. If the answer were obvious, benchmark wins would be enough. They are not enough here.
+
+## Baselines, ablations, and rollout metrics
 
 On the technical side, the project therefore stays focused on things that might look unromantic from the outside: baseline quality, ablation logic, data contracts, normalization choices, rollout metrics, and structure-preserving losses. But those are exactly the things that separate a stable research direction from a sequence of demos. When I say I care about operator learning for Navier-Stokes systems, this is what I mean. I care about the total experimental setting in which an operator can be said to have learned something meaningful.
 
