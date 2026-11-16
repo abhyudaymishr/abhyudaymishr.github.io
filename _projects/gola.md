@@ -1,4 +1,10 @@
 ---
+math: true
+short_title: "GOLA"
+category: "Scientific ML"
+cover: "/assets/images/operators.svg"
+card_summary: "Geometry-induced sparse attention for learning the evolution of physical systems."
+featured: true
 title: "GOLA: Geometric Neural Operator with Sparse Local Attention"
 summary: "A formal operator-learning scaffold for one-step PDE time-advance operators using geometry-induced sparse attention and physics-aware losses."
 status: "Active research"
@@ -22,7 +28,7 @@ $$
 using geometry-induced sparse attention rather than dense global token mixing. But if I say only that, it sounds like a mild engineering variation. For me the project is more serious than that. It is an attempt to encode a scientific claim into the model itself: if the operator is local, then the architecture should be local in a meaningful geometric sense, not merely sparse because sparse happens to be cheaper.
 
 <figure class="image-card">
-  <img src="/images/gola-attention.png" alt="Sparse geometric attention visualization from GOLA">
+  <img src="{{ '/images/gola-attention.png' | relative_url }}" alt="Sparse geometric attention visualization from GOLA" width="2979" height="2115" loading="lazy" decoding="async">
   <figcaption>The actual GOLA repository includes dataset-backed and synthetic visualizations showing why sparse geometric attention is a natural fit for local operator structure.</figcaption>
 </figure>
 

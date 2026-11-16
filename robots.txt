@@ -2,6 +2,7 @@
 layout: null
 permalink: /robots.txt
 sitemap: false
+search: false
 ---
 User-agent: *
 Allow: /

@@ -1,14 +1,9 @@
 ---
-title: Blog
+title: Research notebook
 permalink: /blog/
-kicker: Notes
-intro: "Technical notes and philosophical research essays on operator learning, quantum systems, topology, and model-building."
+kicker: Thinking in the open
+intro: "Notes on building models, asking better questions, and the mathematics behind learning systems."
+wide: true
+collection_page: true
 ---
-<div class="cards">
-  {% for post in site.posts %}
-    <a class="card-link" href="{{ post.url | relative_url }}">
-      <strong>{{ post.title }}</strong>
-      <span>{{ post.date | date: "%B %-d, %Y" }}</span>
-    </a>
-  {% endfor %}
-</div>
+<div class="notes-grid">{% for post in site.posts %}{% include note-card.html post=post %}{% endfor %}</div>

@@ -1,4 +1,10 @@
 ---
+math: true
+short_title: "Oculon"
+category: "Scientific ML"
+cover: "/assets/images/oculon.svg"
+card_summary: "Spatiotemporal forecasting, forward-time evaluation, and tools for AI agents."
+featured: true
 title: "Oculon: Spatiotemporal Hotspot Forecasting & MCP Server"
 permalink: /projects/oculon/
 summary: "An end-to-end spatiotemporal machine learning forecasting engine and Model Context Protocol (MCP) server for 240k+ public safety records in Delhi, evaluated with expanding-window rolling-origin protocols and Wasserstein transport distances."

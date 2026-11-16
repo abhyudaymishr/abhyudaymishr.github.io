@@ -1,0 +1,16 @@
+---
+layout: page
+title: Search
+permalink: /search/
+kicker: Explore the work
+intro: "Find projects, publications, and notes by topic or title."
+body_class: search-page
+noindex: true
+sitemap: false
+search: false
+---
+<div data-search-page>
+  <form role="search" action="{{ '/search/' | relative_url }}" data-search-form><label class="sr-only" for="page-query">Search the site</label><div class="search-field">{% include icon.html name='search' %}<input id="page-query" type="search" name="q" placeholder="Try quantum, topology, or sparse attention…" maxlength="200" data-search-input><button class="button button--small" type="submit">Search</button></div></form>
+  <p class="search-status" role="status" data-search-status>Search projects, publications, and research notes.</p><div class="search-results" data-search-results></div>
+</div>
+<div class="search-fallback"><h2>Browse the research</h2><p>Explore every project and note below. Live search uses JavaScript.</p><ul>{% assign entries = site.projects | concat: site.publications | concat: site.posts %}{% for entry in entries %}<li><a href="{{ entry.url | relative_url }}">{{ entry.title }}</a></li>{% endfor %}</ul></div>

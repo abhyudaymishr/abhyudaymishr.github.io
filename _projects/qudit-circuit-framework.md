@@ -1,4 +1,14 @@
 ---
+author_list:
+  - Manav Seksaria
+  - Abhyuday Mishra
+  - Anil Prabhakar
+math: true
+short_title: "Beyond the qubit"
+category: "Quantum computing"
+cover: "/assets/images/quantum.svg"
+card_summary: "A collaborative framework for simulating higher-dimensional quantum circuits."
+featured: true
 title: "Qudit Quantum Circuit Framework"
 permalink: /projects/qudit-circuit-framework/
 summary: "A group project on high-performance simulation for qudit systems, developed with Manav Seksaria and Anil Prabhakar."
@@ -21,19 +31,19 @@ That is why the central motivation here is not simply â€œmore levels than two.â€
 
 <div class="image-grid">
   <figure class="image-card">
-    <img src="https://scx2.b-cdn.net/gfx/news/2023/two-qudits-fully-entan.jpg" alt="Illustration of high-dimensional entanglement in a two-qudit system">
+    <img src="https://scx2.b-cdn.net/gfx/news/2023/two-qudits-fully-entan.jpg" alt="Illustration of high-dimensional entanglement in a two-qudit system" width="800" height="500" loading="lazy" decoding="async">
     <figcaption>High-dimensional entanglement is one reason qudit-native simulation tools matter in practice.</figcaption>
   </figure>
   <figure class="image-card">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Quantum_Logic_Gates.png/500px-Quantum_Logic_Gates.png" alt="Diagram of quantum logic gates">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Quantum_Logic_Gates.png/500px-Quantum_Logic_Gates.png" alt="Diagram of quantum logic gates" width="800" height="500" loading="lazy" decoding="async">
     <figcaption>Generalized gate libraries extend familiar circuit logic beyond the qubit-only case.</figcaption>
   </figure>
   <figure class="image-card">
-    <img src="https://www.researchgate.net/publication/318729550/figure/fig3/AS%3A667647955972114%401536191085766/QFT-circuit-implemented-on-d-level-qudits.png" alt="QFT circuit implemented on d-level qudits">
+    <img src="https://www.researchgate.net/publication/318729550/figure/fig3/AS%3A667647955972114%401536191085766/QFT-circuit-implemented-on-d-level-qudits.png" alt="QFT circuit implemented on d-level qudits" width="800" height="500" loading="lazy" decoding="async">
     <figcaption>The qudit quantum Fourier transform is a key target for generalized circuit design and algorithmic testing.</figcaption>
   </figure>
   <figure class="image-card">
-    <img src="https://miro.medium.com/v2/resize:fit:1200/1*DalQlJkwW9kijs8J6iLr0w.png" alt="Quantum circuit visualization">
+    <img src="https://miro.medium.com/v2/resize:fit:1200/1*DalQlJkwW9kijs8J6iLr0w.png" alt="Quantum circuit visualization" width="800" height="500" loading="lazy" decoding="async">
     <figcaption>Simulator ergonomics matter: abstractions should make high-dimensional circuits easy to inspect, compose, and optimize.</figcaption>
   </figure>
 </div>

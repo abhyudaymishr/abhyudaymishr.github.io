@@ -1,4 +1,9 @@
 ---
+short_title: "Learning fluid dynamics"
+category: "Scientific ML"
+cover: "/assets/images/operators.svg"
+card_summary: "Reproducible neural operator experiments for incompressible flow."
+featured: false
 title: "Neural Operators for Navier-Stokes Systems"
 summary: "Operator-learning experiments for incompressible fluid systems with an emphasis on structure, locality, and reproducibility."
 status: "Ongoing"

@@ -1,0 +1,69 @@
+{% assign home_url = '/' | absolute_url %}
+{% assign person_id = home_url | append: '#person' %}
+{% assign website_id = home_url | append: '#website' %}
+{% assign webpage_id = canonical_url | append: '#webpage' %}
+{% assign entity_id = canonical_url | append: '#work' %}
+{% assign page_type = 'WebPage' %}
+{% if page.layout == 'home' %}{% assign page_type = 'ProfilePage' %}{% elsif page.collection_page %}{% assign page_type = 'CollectionPage' %}{% endif %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person", "@id": {{ person_id | jsonify }},
+      "name": {{ site.author.name | jsonify }}, "url": {{ home_url | jsonify }},
+      "description": {{ site.author.summary | jsonify }},
+      "affiliation": { "@type": "CollegeOrUniversity", "name": {{ site.author.affiliation | jsonify }} },
+      "sameAs": [{{ site.author.github | prepend: 'https://github.com/' | jsonify }}, {{ site.author.linkedin | jsonify }}],
+      "knowsAbout": {{ site.keywords | jsonify }}
+    },
+    {
+      "@type": "WebSite", "@id": {{ website_id | jsonify }},
+      "url": {{ home_url | jsonify }}, "name": {{ site.title | jsonify }},
+      "description": {{ site.description | jsonify }}, "inLanguage": "en",
+      "publisher": { "@id": {{ person_id | jsonify }} }
+    },
+    {
+      "@type": {{ page_type | jsonify }}, "@id": {{ webpage_id | jsonify }},
+      "url": {{ canonical_url | jsonify }}, "name": {{ meta_title | jsonify }},
+      "description": {{ meta_description | jsonify }}, "inLanguage": "en",
+      "isPartOf": { "@id": {{ website_id | jsonify }} },
+      "primaryImageOfPage": { "@type": "ImageObject", "url": {{ meta_image | jsonify }} },
+      "about": { "@id": {{ person_id | jsonify }} }
+      {% if page.layout == 'home' %}, "mainEntity": { "@id": {{ person_id | jsonify }} }
+      {% elsif page.layout == 'post' or page.layout == 'publication' or page.layout == 'project' %}, "mainEntity": { "@id": {{ entity_id | jsonify }} }{% endif %}
+      {% if page.url != '/' %}, "breadcrumb": { "@id": {{ canonical_url | append: '#breadcrumbs' | jsonify }} }{% endif %}
+    }
+    {% if page.layout == 'post' or page.layout == 'publication' or page.layout == 'project' %},
+    {
+      "@type": {% if page.layout == 'post' %}"BlogPosting"{% elsif page.layout == 'publication' %}"ScholarlyArticle"{% else %}"CreativeWork"{% endif %},
+      "@id": {{ entity_id | jsonify }}, "url": {{ canonical_url | jsonify }},
+      "name": {{ meta_title | jsonify }}, "headline": {{ meta_title | jsonify }},
+      "description": {{ meta_description | jsonify }}, "image": {{ meta_image | jsonify }},
+      "mainEntityOfPage": { "@id": {{ webpage_id | jsonify }} },
+      "author": {% if page.author_list %}[{% for author in page.author_list %}{ "@type": "Person", "name": {{ author | jsonify }} }{% unless forloop.last %},{% endunless %}{% endfor %}]{% else %}{ "@id": {{ person_id | jsonify }} }{% endif %},
+      "keywords": {{ page.topics | default: page.keywords | default: site.keywords | jsonify }},
+      "inLanguage": "en"
+      {% if page.status or page.type %}, "creativeWorkStatus": {{ page.status | default: page.type | jsonify }}{% endif %}
+      {% if page.layout == 'post' %}, "datePublished": {{ page.date | date_to_xmlschema | jsonify }}, "dateModified": {{ page.last_modified_at | default: page.date | date_to_xmlschema | jsonify }}{% elsif page.last_modified_at %}, "dateModified": {{ page.last_modified_at | date_to_xmlschema | jsonify }}{% endif %}
+    }
+    {% endif %}
+    {% if page.url != '/' %},
+    {
+      "@type": "BreadcrumbList", "@id": {{ canonical_url | append: '#breadcrumbs' | jsonify }},
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": {{ home_url | jsonify }} },
+        {% if page.layout == 'project' %}{ "@type": "ListItem", "position": 2, "name": "Projects", "item": {{ '/projects/' | absolute_url | jsonify }} },{% elsif page.layout == 'publication' %}{ "@type": "ListItem", "position": 2, "name": "Publications", "item": {{ '/publications/' | absolute_url | jsonify }} },{% elsif page.layout == 'post' %}{ "@type": "ListItem", "position": 2, "name": "Writing", "item": {{ '/blog/' | absolute_url | jsonify }} },{% endif %}
+        { "@type": "ListItem", "position": {% if page.layout == 'project' or page.layout == 'publication' or page.layout == 'post' %}3{% else %}2{% endif %}, "name": {{ meta_title | jsonify }}, "item": {{ canonical_url | jsonify }} }
+      ]
+    }
+    {% endif %}
+    {% if page.collection_page %},
+    {% assign list = site.projects | sort: 'order' %}{% if page.url == '/publications/' %}{% assign list = site.publications | sort: 'year' | reverse %}{% elsif page.url == '/blog/' %}{% assign list = site.posts %}{% endif %}
+    { "@type": "ItemList", "@id": {{ canonical_url | append: '#items' | jsonify }}, "name": {{ meta_title | jsonify }}, "numberOfItems": {{ list.size }}, "itemListElement": [
+      {% for entry in list %}{ "@type": "ListItem", "position": {{ forloop.index }}, "name": {{ entry.title | jsonify }}, "url": {{ entry.url | absolute_url | jsonify }} }{% unless forloop.last %},{% endunless %}{% endfor %}
+    ] }
+    {% endif %}
+  ]
+}
+</script>

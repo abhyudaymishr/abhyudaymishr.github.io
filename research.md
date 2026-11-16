@@ -1,4 +1,5 @@
 ---
+math: true
 title: Research
 permalink: /research/
 kicker: Research

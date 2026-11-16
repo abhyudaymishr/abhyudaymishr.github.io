@@ -1,27 +1,20 @@
 ---
 title: Projects
 permalink: /projects/
-kicker: Build
-intro: "Research systems and prototypes spanning operator learning, quantum circuits, topology, and efficient ML, each paired with a reflective research note."
+kicker: Research & engineering
+intro: "From mathematical ideas to working systems. Explore experiments in scientific machine learning, quantum computing, topology, and language modeling."
+wide: true
+collection_page: true
 ---
-{% assign ordered_projects = site.projects | sort: "order" %}
-<div class="cards">
-  {% for project in ordered_projects %}
-    <a class="project-card" href="{{ project.url | relative_url }}">
-      {% if project.image %}
-        <div class="project-card__media">
-          <img src="{{ project.image }}" alt="{{ project.image_alt | default: project.title }}">
-        </div>
-      {% else %}
-        <div class="project-card__media project-card__media--fallback">
-          <span>{{ project.topics | first | default: "Research" }}</span>
-        </div>
-      {% endif %}
-      <div class="project-card__body">
-        <p class="eyebrow">{{ project.topics | first | default: "Research" }}</p>
-        <strong>{{ project.title }}</strong>
-        <span>{{ project.summary }}</span>
-      </div>
-    </a>
-  {% endfor %}
+<div data-project-browser>
+  <div class="filter-bar" role="group" aria-label="Filter projects by research area" data-project-filters hidden>
+    <button class="filter-button" type="button" data-filter="all" aria-pressed="true">All research</button>
+    {% assign categories = site.projects | sort: 'order' | map: 'category' | uniq %}
+    {% for category in categories %}<button class="filter-button" type="button" data-filter="{{ category | escape }}" aria-pressed="false">{{ category }}</button>{% endfor %}
+  </div>
+  <p class="filter-count" role="status" data-project-count hidden></p>
+  <div class="project-grid">
+    {% assign ordered_projects = site.projects | sort: 'order' %}
+    {% for project in ordered_projects %}{% include project-card.html project=project %}{% endfor %}
+  </div>
 </div>

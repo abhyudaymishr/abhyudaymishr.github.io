@@ -1,4 +1,9 @@
 ---
+short_title: "Knot-type recognition"
+category: "Topology"
+cover: "/assets/images/topology.svg"
+card_summary: "Connecting images, graph representations, and the mathematical structure of knots."
+featured: false
 title: "Knot-Type Recognition"
 permalink: /projects/knot-recognition/
 summary: "A scientific knot-analysis pipeline that combines image classification, heuristic Gauss/PD extraction, and protein-knot experiments."
@@ -19,11 +24,11 @@ That is why the repository is deliberately hybrid. It does contain a ResNet-base
 
 <div class="image-grid">
   <figure class="image-card">
-    <img src="https://mathworld.wolfram.com/images/eps-svg/FigureEightKnot_700.svg" alt="Figure-eight knot illustration">
+    <img src="https://mathworld.wolfram.com/images/eps-svg/FigureEightKnot_700.svg" alt="Figure-eight knot illustration" width="800" height="500" loading="lazy" decoding="async">
     <figcaption>The 2D drawing pipeline starts from knot images, where crossing structure and local geometry drive both classification and symbolic code extraction.</figcaption>
   </figure>
   <figure class="image-card">
-    <img src="https://www.researchgate.net/publication/321279745/figure/fig1/AS%3A963465938235395%401606719588042/Selected-knot-and-link-diagrams.gif" alt="Selected knot and link diagrams">
+    <img src="https://www.researchgate.net/publication/321279745/figure/fig1/AS%3A963465938235395%401606719588042/Selected-knot-and-link-diagrams.gif" alt="Selected knot and link diagrams" width="800" height="500" loading="lazy" decoding="async">
     <figcaption>The project also treats knot analysis as a structural problem: simplify diagrams, propose moves, and recover symbolic codes rather than only predict labels.</figcaption>
   </figure>
 </div>

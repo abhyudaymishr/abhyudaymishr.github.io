@@ -1,0 +1,27 @@
+---
+layout: null
+permalink: /llms-full.txt
+sitemap: false
+search: false
+---
+# {{ site.title }} — Research content
+
+{{ site.author.summary }}
+
+Canonical site: {{ '/' | absolute_url }}
+This is a generated reading export of the public source content. Project and publication status and collaborative authorship remain part of each entry.
+
+{% assign entries = site.projects | concat: site.publications | concat: site.posts %}{% for entry in entries %}
+---
+
+# {{ entry.title }}
+
+URL: {{ entry.url | absolute_url }}
+{% if entry.status %}Status: {{ entry.status }}{% endif %}
+{% if entry.type %}Publication type: {{ entry.type }}{% endif %}
+{% if entry.authors %}Authors: {{ entry.authors }}{% endif %}
+{% if entry.summary %}Summary: {{ entry.summary }}{% endif %}
+{% if entry.abstract %}Abstract: {{ entry.abstract }}{% endif %}
+
+{{ entry.content }}
+{% endfor %}

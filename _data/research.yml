@@ -1,0 +1,9 @@
+- title: Scientific machine learning
+  description: Geometry-aware neural operators, sparse attention, and learning the dynamics of physical systems.
+  url: /research/#gola-and-operator-learning
+- title: Quantum computing
+  description: Generalized qudit circuits and simulation beyond two-level quantum systems.
+  url: /projects/qudit-circuit-framework/
+- title: Topology & geometric learning
+  description: Connecting learned visual representations with the mathematical structure of knots.
+  url: /projects/knot-recognition/

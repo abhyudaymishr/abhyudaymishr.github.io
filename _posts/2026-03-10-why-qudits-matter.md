@@ -1,4 +1,5 @@
 ---
+math: true
 title: "Why Qudits Are Worth Building Tools For"
 date: 2026-03-10
 ---

@@ -1,4 +1,5 @@
 ---
+math: true
 title: Abhyuday Mishra
 permalink: /cv/
 body_class: cv-page

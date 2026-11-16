@@ -1,14 +1,5 @@
-<nav class="site-nav" aria-label="Primary">
-  {% for item in site.data.navigation %}
-    {% assign active = false %}
-    {% if page.url == item.url %}
-      {% assign active = true %}
-    {% elsif item.url != "/" and page.url contains item.url %}
-      {% assign active = true %}
-    {% endif %}
-    <a href="{{ item.url | relative_url }}" class="site-nav__link{% if active %} is-active{% endif %}">
-      {{ item.title }}
-    </a>
-  {% endfor %}
-</nav>
-
+<nav class="site-nav site-nav--desktop" aria-label="Primary">{% include navigation-links.html %}</nav>
+<details class="navigation" data-navigation>
+  <summary class="icon-button navigation__toggle" aria-label="Navigation menu">{% include icon.html name='menu' %}<span class="sr-only">Menu</span></summary>
+  <nav class="site-nav" aria-label="Mobile navigation">{% include navigation-links.html %}</nav>
+</details>

@@ -1,0 +1,38 @@
+---
+layout: null
+permalink: /llms.txt
+sitemap: false
+search: false
+---
+# {{ site.title }}
+
+> {{ site.author.summary }}
+
+Public research portfolio of {{ site.author.name }}, a B.Tech–M.Tech Computer Science and Engineering student at {{ site.author.affiliation }}. This file is a navigation aid for tools that support it; it is not an instruction to agents or a search ranking mechanism.
+
+## Start here
+
+- [Research]({{ '/research/' | absolute_url }}): Current questions and research directions.
+- [Projects]({{ '/projects/' | absolute_url }}): Research systems with descriptions, status, and source links where available.
+- [Publications]({{ '/publications/' | absolute_url }}): Conference work and manuscripts; draft status is explicit.
+- [Background]({{ '/cv/' | absolute_url }}): Education, experience, and skills.
+- [Contact]({{ '/contact/' | absolute_url }}): Public professional contact channels.
+
+## Projects
+
+{% assign projects = site.projects | sort: 'order' %}{% for project in projects %}- [{{ project.title }}]({{ project.url | absolute_url }}): {{ project.summary }} Status: {{ project.status }}.
+{% endfor %}
+## Publications
+
+{% for publication in site.publications %}- [{{ publication.title }}]({{ publication.url | absolute_url }}): {{ publication.type }}. {{ publication.authors }}. {{ publication.venue }}.
+{% endfor %}
+## Machine-readable resources
+
+- [Content index]({{ '/content-index.json' | absolute_url }}): JSON with titles, canonical URLs, topics, descriptions, status, and source text.
+- [Full research text]({{ '/llms-full.txt' | absolute_url }}): Markdown source for projects, publications, and notes.
+- [Sitemap]({{ '/sitemap.xml' | absolute_url }}): Canonical page inventory.
+- [Research notebook feed]({{ '/feed.xml' | absolute_url }}): Atom feed of research notes.
+
+## Reading context
+
+GOLA is active research. A manuscript in preparation is not an accepted publication. Qudit simulation work is collaborative; authors are credited on its publication page. Project metrics are claims from the linked project descriptions and should be read with their evaluation context. This portfolio does not expose a live agent execution API.

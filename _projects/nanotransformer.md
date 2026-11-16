@@ -1,4 +1,9 @@
 ---
+short_title: "NanoTransformer"
+category: "Language models"
+cover: "/assets/images/language.svg"
+card_summary: "A small language model built to make the complete learning system inspectable."
+featured: false
 title: "NanoTransformer"
 summary: "A compact causal language model project that reflects my broader interest in efficient learning systems and research-grade implementation."
 status: "Built"

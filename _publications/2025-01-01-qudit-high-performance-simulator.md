@@ -1,4 +1,8 @@
 ---
+author_list:
+  - Manav Seksaria
+  - Abhyuday Mishra
+  - Anil Prabhakar
 title: "qudit: High-Performance Simulator for Qudit Systems"
 authors: "Manav Seksaria, Abhyuday Mishra, and Anil Prabhakar"
 venue: "2025 Supercomputing India (SCI)"

@@ -7,7 +7,7 @@ timezone: "Asia/Kolkata"
 repo_url: "https://github.com/abhyudaymishr/abhyudaymishr.github.io"
 repo_branch: "main"
 locale: "en_US"
-default_image: "/assets/images/seo-card.svg"
+default_image: "/assets/images/seo-card.png"
 keywords:
   - Quantum Computing
   - Scientific Machine Learning
@@ -59,3 +59,17 @@ defaults:
       type: posts
     values:
       layout: post
+
+# Presentation, source utilities, and checks are kept out of the public artifact.
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - scripts
+  - tests
+  - node_modules
+  - package.json
+  - package-lock.json
+  - vendor
+  - .bundle
+  - .github

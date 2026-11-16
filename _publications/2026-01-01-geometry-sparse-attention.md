@@ -1,4 +1,6 @@
 ---
+author_list:
+  - Abhyuday Mishra
 title: "Geometry-Induced Sparse Attention for PDE Operators"
 authors: "Abhyuday Mishra"
 venue: "Manuscript in preparation"

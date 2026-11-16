@@ -1,4 +1,5 @@
 ---
+math: true
 title: "Why Geometry Matters in Operator Learning"
 date: 2026-03-16
 ---

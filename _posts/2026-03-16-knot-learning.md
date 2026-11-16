@@ -1,4 +1,5 @@
 ---
+math: true
 title: "Learning Knot Invariants with Neural Networks"
 date: 2026-02-01
 ---
